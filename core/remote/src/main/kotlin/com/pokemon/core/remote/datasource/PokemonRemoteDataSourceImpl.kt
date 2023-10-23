@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
 import com.pokemon.core.remote.response.DetailPokemonResponse
+import com.pokemon.core.remote.response.InfoPokemonResponse
 import com.pokemon.core.remote.response.PokemonResponse
 import com.pokemon.core.remote.util.pokemonApiCall
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,10 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
         Pager(config = PagingConfig(pageSize = 20), pagingSourceFactory = {
             PokemonPagingSource(pokemonAPI = pokemonAPI)
         }).flow
+
+    override suspend fun getPokemonInfo(pokemonId: Int): InfoPokemonResponse = pokemonApiCall {
+        pokemonAPI.getPokemonInfo(pokemonId = pokemonId)
+    }
 
     override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonResponse = pokemonApiCall {
         pokemonAPI.getPokemonDetail(pokemonId = pokemonId)

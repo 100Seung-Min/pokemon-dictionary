@@ -2,6 +2,7 @@ package com.pokemon.feature.main.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,7 +25,7 @@ class HomeViewModel @Inject constructor(
     private fun getPokemonList() = intent {
         viewModelScope.launch {
             getPokemonListUseCase().onSuccess {
-                reduce { state.copy(pokemonListPager = it) }
+                reduce { state.copy(pokemonListPager = it.cachedIn(viewModelScope)) }
             }.onFailure {
             }
         }

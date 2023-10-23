@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pokemon.core.desgin_system"
+    namespace = "com.pokemon.core.design_system"
     buildFeatures {
         compose = true
     }

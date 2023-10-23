@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">포켓몬 사전</string>
+    <string name="normal">노말</string>
+    <string name="fighting">격투</string>
+    <string name="flying">비행</string>
+    <string name="poison">독</string>
+    <string name="ground">땅</string>
+    <string name="rock">바위</string>
+    <string name="bug">벌레</string>
+    <string name="ghost">고스트</string>
+    <string name="steel">강철</string>
+    <string name="fire">불꽃</string>
+    <string name="water">물</string>
+    <string name="grass">풀</string>
+    <string name="electric">전기</string>
+    <string name="psychic">에스퍼</string>
+    <string name="ice">얼음</string>
+    <string name="dragon">드래곤</string>
+    <string name="dark">악</string>
+    <string name="fairy">페어리</string>
+    <string name="unknown">\?\?\?</string>
+    <string name="shadow">다크</string>
 </resources>

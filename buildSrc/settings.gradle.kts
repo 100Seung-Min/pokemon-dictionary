@@ -5,19 +5,19 @@ pluginManagement {
         mavenCentral()
     }
 }
+
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
+
     repositories {
         google()
         mavenCentral()
     }
 }
-rootProject.name = "PokemonDictionary"
-include ':app'
-include ':core:domain'
-include ':core:remote'
-include ':core:local'
-include ':core:data'
-include ':core:design-system'
-include ':core:ui'
-include ':core:navigation'

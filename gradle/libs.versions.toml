@@ -1,0 +1,92 @@
+[versions]
+versionCode = "1"
+versionName = "1.0.0"
+compileSdk = "34"
+targetSdk = "34"
+minSdk = "28"
+pluginAndroid = "8.1.2"
+pluginKotlin = "1.9.10"
+ksp = "1.9.10-1.0.13"
+coroutines = "1.7.1"
+core = "1.12.0"
+lifecycle = "2.6.2"
+appcompat = "1.6.1"
+preference = "1.2.1"
+paging = "3.2.1"
+pagingCompose = "3.3.0-alpha02"
+composeActivity = "1.8.0"
+compose = "1.5.3"
+material = "1.5.4"
+material3 = "1.1.2"
+hiltNav = "1.0.0"
+accomanist = "0.31.0-alpha"
+hilt = "2.48"
+room = "2.6.0"
+orbit = "4.5.0"
+retrofit = "2.9.0"
+okhttp = "4.10.0"
+junit = "4.13.2"
+mockitoKotlin = "4.1.0"
+mockitoInline = "5.1.1"
+androidJunit = "1.1.5"
+espressoCore = "3.5.1"
+coil = "2.2.2"
+inject = "1"
+com-google-android-material-material = "1.8.0"
+
+[libraries]
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "pluginAndroid" }
+plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "pluginKotlin" }
+plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "core" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-preference = { module = "androidx.preference:preference-ktx", version.ref = "preference" }
+androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+paging = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+compose-paging = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+compose-nav = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNav" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "material" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+compose-tool = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+compose-test = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+accompanist-nav = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accomanist" }
+accompanist-view-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accomanist" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+room = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+orbit-core = { module = "org.orbit-mvi:orbit-core", version.ref = "orbit" }
+orbit-viewmodel = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
+orbit-test = { module = "org.orbit-mvi:orbit-test", version.ref = "orbit" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-sse = { module = "com.squareup.okhttp3:okhttp-sse", version.ref = "okhttp" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+inject = { module = "javax.inject:javax.inject", version.ref = "inject" }
+test-junit = { module = "junit:junit", version.ref = "junit" }
+test-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+test-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
+test-anroid-junit = { module = "androidx.test.ext:junit", version.ref = "androidJunit" }
+test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+material = { group = "com.google.android.material", name = "material", version.ref = "com-google-android-material-material" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+[bundles]
+coroutine = ["coroutines-core", "coroutines-android"]
+compose = ["compose-activity", "compose-ui", "compose-preview", "compose-material", "compose-material3", "compose-nav", "compose-paging"]
+compose-debug = ["compose-tool", "compose-manifest"]
+orbit = ["orbit-core", "orbit-viewmodel", "orbit-test"]
+retrofit = ["retrofit", "retrofit-converter-gson"]
+okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-sse"]

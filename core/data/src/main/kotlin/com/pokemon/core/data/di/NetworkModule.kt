@@ -2,6 +2,7 @@ package com.pokemon.core.data.di
 
 import android.content.Context
 import com.pokemon.core.data.BuildConfig
+import com.pokemon.core.remote.api.PokemonAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
-    fun provideOkHttpclient(
-        @ApplicationContext context: Context,
-    ): OkHttpClient {
+    fun provideOkHttpclient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .cache(Cache(context.cacheDir, 20L * 1024 * 1024))
             .build()
     }
 
@@ -28,8 +26,11 @@ object NetworkModule {
     fun provideRetrofitClient(
         okHttpClient: OkHttpClient,
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.BUILD_TYPE)
+        .baseUrl(BuildConfig.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    @Provides
+    fun providePokemonAPI(retrofit: Retrofit): PokemonAPI = retrofit.create(PokemonAPI::class.java)
 }

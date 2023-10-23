@@ -11,3 +11,8 @@ android {
         versionName = libs.versions.versionName.get()
     }
 }
+dependencies {
+    implementation(project(":feature:main"))
+    implementation(project(":feature:pokemon"))
+}
+

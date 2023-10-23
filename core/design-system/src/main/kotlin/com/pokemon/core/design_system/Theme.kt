@@ -29,7 +29,7 @@ fun PokemonTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
             content = {
                 Box(
                     modifier = Modifier
-                        .background(SchoolTheme.colors.main)
+                        .background(PokemonTheme.colors.main)
                         .fillMaxSize()
                 ) {
                     content()
@@ -39,7 +39,7 @@ fun PokemonTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
     }
 }
 
-object SchoolTheme {
+object PokemonTheme {
     val colors: PokemonColor
         @Composable
         get() = LocalPokemonColors.current

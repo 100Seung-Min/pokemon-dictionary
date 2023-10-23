@@ -1,9 +1,18 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("pokemon-core")
 }
 
 android {
     namespace = "com.pokemon.core.data"
+    defaultConfig {
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            gradleLocalProperties(rootDir).getProperty("BASE_URL")
+        )
+    }
 }
 
 dependencies {

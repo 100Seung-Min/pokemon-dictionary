@@ -13,6 +13,9 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.pokemon.core.design_system.PokemonTheme
+import com.pokemon.core.navigation.home.MainNavigationItem
+import com.pokemon.feature.main.navigation.homeGraph
+import com.pokemon.feature.pokemon.navigation.pokemonGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +39,7 @@ class BaseActivity : ComponentActivity() {
 fun BaseApp(navController: NavHostController) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = "",
+        startDestination = MainNavigationItem.Main.route,
         enterTransition = {
             slideInHorizontally(
                 initialOffsetX = { it * 2 }, animationSpec = tween(
@@ -53,5 +56,7 @@ fun BaseApp(navController: NavHostController) {
             )
         }
     ) {
+        homeGraph(navController = navController)
+        pokemonGraph(navController = navController)
     }
 }

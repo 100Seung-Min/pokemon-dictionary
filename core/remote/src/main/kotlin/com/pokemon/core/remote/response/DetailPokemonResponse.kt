@@ -50,9 +50,8 @@ fun DetailPokemonResponse.toEntity() = DetailPokemonEntity(
     id = id,
     englishName = name,
     evolutionId = evolutionChain.url.getId(),
-    profileUrl = id.toPokemonImageUrl(),
-    name = nameList.first { it.language.name == "ko" }.name,
-    genus = genusList.first { it.language.name == "ko" }.genus,
+    name = nameList.firstOrNull { it.language.name == "ko" }?.name ?: name,
+    genus = genusList.firstOrNull { it.language.name == "ko" }?.genus ?: "",
     flavorList = flavorList.filter { it.language.name == "ko" }
         .map { it.flavorText.replace("\n", " ") }.distinct()
 )

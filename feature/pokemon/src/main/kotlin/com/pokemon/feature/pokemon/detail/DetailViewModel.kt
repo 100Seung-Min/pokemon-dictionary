@@ -23,24 +23,32 @@ class DetailViewModel @Inject constructor(
 ) : ContainerHost<DetailState, Unit>, ViewModel() {
     override val container = container<DetailState, Unit>(DetailState())
 
-    suspend fun getPokemonDetail(pokemonId: Int) = intent {
+    suspend fun getPokemonInfo(pokemonId: Int) = intent {
         viewModelScope.launch {
             getPokemonInfoUseCase(pokemonId = pokemonId).onSuccess {
                 reduce {
-                    state.copy(weight = it.weight, height = it.height, typeList = it.typeList)
+                    state.copy(
+                        profileUrl = it.profileUrl,
+                        weight = it.weight,
+                        height = it.height,
+                        typeList = it.typeList
+                    )
                 }
                 it.moveList.forEach {
                     getMoveDetail(moveId = it)
                 }
+                getPokemonDetail(pokemonId = it.speciesId)
             }
         }
+    }
+
+    private suspend fun getPokemonDetail(pokemonId: Int) = intent {
         viewModelScope.launch {
             getPokemonDetailUseCase(pokemonId = pokemonId).onSuccess {
                 reduce {
                     state.copy(
                         id = it.id,
                         englishName = it.englishName,
-                        profileUrl = it.profileUrl,
                         name = it.name,
                         genus = it.genus,
                         flavorList = it.flavorList
@@ -50,6 +58,7 @@ class DetailViewModel @Inject constructor(
             }
         }
     }
+
 
     private suspend fun getMoveDetail(moveId: Int) = intent {
         viewModelScope.launch {

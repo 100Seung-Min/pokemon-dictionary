@@ -30,18 +30,23 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getPokemonListUseCase().onSuccess {
                 reduce { state.copy(pokemonListPager = it.cachedIn(viewModelScope)) }
-            }.onFailure {
             }
         }
     }
 
     fun getPokemonInfo(pokemonId: Int) = intent {
         viewModelScope.launch {
-            getPokemonDetailUseCase(pokemonId = pokemonId).onSuccess {
-                reduce { state.copy(pokemonList = state.pokemonList.plus(pokemonId to it.name)) }
-            }
             getPokemonInfoUseCase(pokemonId = pokemonId).onSuccess {
                 reduce { state.copy(typeList = state.typeList.plus(pokemonId to it.typeList[0])) }
+                getPokemonDetail(speciesId = it.speciesId, pokemonId = pokemonId)
+            }
+        }
+    }
+
+    private fun getPokemonDetail(speciesId: Int, pokemonId: Int) = intent {
+        viewModelScope.launch {
+            getPokemonDetailUseCase(pokemonId = speciesId).onSuccess {
+                reduce { state.copy(pokemonList = state.pokemonList.plus(pokemonId to it.name)) }
             }
         }
     }

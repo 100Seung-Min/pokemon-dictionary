@@ -60,7 +60,7 @@ fun DetailScreen(
     var selectedMove: DetailMoveEntity? by remember { mutableStateOf(null) }
 
     LaunchedEffect(Unit) {
-        detailViewModel.getPokemonDetail(pokemonId = id)
+        detailViewModel.getPokemonInfo(pokemonId = id)
     }
 
     LazyColumn(

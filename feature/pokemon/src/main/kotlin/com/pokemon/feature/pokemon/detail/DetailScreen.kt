@@ -1,6 +1,7 @@
 package com.pokemon.feature.pokemon.detail
 
 import android.media.MediaPlayer
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -35,6 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
+import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.ui.util.toPokemonType
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -47,6 +53,8 @@ fun DetailScreen(
     val container = detailViewModel.container
     val state = container.stateFlow.collectAsState().value
     val sideEffect = container.sideEffectFlow
+    var moveDescriptionVisible by remember { mutableStateOf(false) }
+    var selectedMove: DetailMoveEntity? by remember { mutableStateOf(null) }
 
     LaunchedEffect(Unit) {
         detailViewModel.getPokemonDetail(pokemonId = id)
@@ -121,12 +129,31 @@ fun DetailScreen(
             items(state.moveList) {
                 Text(
                     modifier = Modifier
+                        .clickable {
+                            if (selectedMove == null || selectedMove != it) {
+                                moveDescriptionVisible = true
+                                selectedMove = it
+                            } else {
+                                moveDescriptionVisible = false
+                                selectedMove = null
+                            }
+                        }
                         .background(
                             it.type.toPokemonType().typeColor,
                             RoundedCornerShape(10.dp)
                         )
                         .padding(horizontal = 7.dp, vertical = 5.dp), text = it.name
                 )
+            }
+        }
+        AnimatedVisibility(visible = moveDescriptionVisible) {
+            selectedMove?.let {
+                val moveDescriptionPagerState = rememberPagerState {
+                    it.flavorList.size
+                }
+                HorizontalPager(state = moveDescriptionPagerState) { index ->
+                    Text(text = it.flavorList[index])
+                }
             }
         }
         Text(text = "상세 설명")

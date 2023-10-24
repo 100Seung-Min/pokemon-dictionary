@@ -2,6 +2,7 @@ package com.pokemon.core.remote.api
 
 import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
+import com.pokemon.core.remote.response.InfoEvolutionResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
 import com.pokemon.core.remote.response.PagingPokemonResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
@@ -30,4 +31,9 @@ interface PokemonAPI {
     suspend fun getMoveDetail(
         @Path("moveId") moveId: Int,
     ): DetailMoveResponse
+
+    @GET("evolution-chain/{evolutionId}")
+    suspend fun getEvolutionInfo(
+        @Path("evolutionId") evolutionId: Int,
+    ): InfoEvolutionResponse
 }

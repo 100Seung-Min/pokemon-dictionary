@@ -8,6 +8,8 @@ data class DetailPokemonResponse(
     val id: Int,
     @SerializedName("name")
     val name: String,
+    @SerializedName("evolution_chain")
+    val evolutionChain: EvolutionChain,
     @SerializedName("flavor_text_entries")
     val flavorList: List<Flavor>,
     @SerializedName("genera")
@@ -15,6 +17,11 @@ data class DetailPokemonResponse(
     @SerializedName("names")
     val nameList: List<Name>,
 ) {
+    data class EvolutionChain(
+        @SerializedName("url")
+        val url: String,
+    )
+
     data class Flavor(
         @SerializedName("flavor_text")
         val flavorText: String,
@@ -40,6 +47,7 @@ data class DetailPokemonResponse(
 fun DetailPokemonResponse.toEntity() = DetailPokemonEntity(
     id = id,
     englishName = name,
+    evolutionId = evolutionChain.url.split("/").dropLast(1).last().toInt(),
     profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
     name = nameList.first { it.language.name == "ko" }.name,
     genus = genusList.first { it.language.name == "ko" }.genus,

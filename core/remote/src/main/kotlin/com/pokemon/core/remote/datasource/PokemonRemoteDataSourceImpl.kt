@@ -7,6 +7,7 @@ import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
 import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
+import com.pokemon.core.remote.response.InfoEvolutionResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
 import com.pokemon.core.remote.response.PokemonResponse
 import com.pokemon.core.remote.util.pokemonApiCall
@@ -32,4 +33,9 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
     override suspend fun getMoveDetail(moveId: Int): DetailMoveResponse = pokemonApiCall {
         pokemonAPI.getMoveDetail(moveId = moveId)
     }
+
+    override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionResponse =
+        pokemonApiCall {
+            pokemonAPI.getEvolutionInfo(evolutionId = evolutionId)
+        }
 }

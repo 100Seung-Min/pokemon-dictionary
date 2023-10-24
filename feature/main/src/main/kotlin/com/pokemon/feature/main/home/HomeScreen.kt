@@ -1,29 +1,23 @@
 package com.pokemon.feature.main.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.AsyncImage
-import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
 import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
+import com.pokemon.core.ui.component.PokemonItem
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.core.ui.util.toPokemonType
 
@@ -58,23 +52,12 @@ fun HomeScreen(
                                 LaunchedEffect(Unit) {
                                     homeViewModel.getPokemonInfo(pokemonId = it.id)
                                 }
-                                Column(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(20.dp))
-                                        .background(
-                                            state.typeList[it.id]?.toPokemonType()?.typeColor
-                                                ?: PokemonTheme.colors.main
-                                        )
-                                        .padding(10.dp)
-                                        .clickable {
-                                            navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
-                                        }
+                                PokemonItem(
+                                    name = state.pokemonList[it.id],
+                                    imageUrl = it.profileUrl,
+                                    backgroundColor = state.typeList[it.id]?.toPokemonType()?.typeColor
                                 ) {
-                                    AsyncImage(
-                                        model = it.profileUrl,
-                                        contentDescription = null,
-                                    )
-                                    Text(text = state.pokemonList[it.id] ?: "")
+                                    navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
                                 }
                             }
                         }

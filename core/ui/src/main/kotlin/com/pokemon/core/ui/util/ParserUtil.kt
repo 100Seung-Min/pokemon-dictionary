@@ -1,4 +1,4 @@
-package com.pokemon.feature.pokemon.util
+package com.pokemon.core.ui.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color

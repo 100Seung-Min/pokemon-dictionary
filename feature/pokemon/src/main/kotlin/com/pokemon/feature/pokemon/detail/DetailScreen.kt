@@ -2,7 +2,6 @@ package com.pokemon.feature.pokemon.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.pokemon.feature.pokemon.util.toPokemonType
+import com.pokemon.core.ui.util.toPokemonType
 
 @Composable
 fun DetailScreen(

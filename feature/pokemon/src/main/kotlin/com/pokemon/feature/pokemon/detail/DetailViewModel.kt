@@ -2,6 +2,7 @@ package com.pokemon.feature.pokemon.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pokemon.core.domain.usecase.pokemon.GetEvolutionInfoUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetMoveDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonInfoUseCase
@@ -18,6 +19,7 @@ class DetailViewModel @Inject constructor(
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase,
     private val getPokemonInfoUseCase: GetPokemonInfoUseCase,
     private val getMoveDetailUseCase: GetMoveDetailUseCase,
+    private val getEvolutionInfoUseCase: GetEvolutionInfoUseCase,
 ) : ContainerHost<DetailState, Unit>, ViewModel() {
     override val container = container<DetailState, Unit>(DetailState())
 
@@ -44,6 +46,7 @@ class DetailViewModel @Inject constructor(
                         flavorList = it.flavorList
                     )
                 }
+                getEvolutionInfo(evolutionId = it.evolutionId)
             }
         }
     }
@@ -56,6 +59,14 @@ class DetailViewModel @Inject constructor(
                         moveList = state.moveList.plus(it)
                     )
                 }
+            }
+        }
+    }
+
+    private suspend fun getEvolutionInfo(evolutionId: Int) = intent {
+        viewModelScope.launch {
+            getEvolutionInfoUseCase(evolutionId = evolutionId).onSuccess {
+                reduce { state.copy(evolutionList = it.evolutionList) }
             }
         }
     }

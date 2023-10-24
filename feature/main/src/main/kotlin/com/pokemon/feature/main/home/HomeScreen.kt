@@ -2,7 +2,10 @@ package com.pokemon.feature.main.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -43,6 +46,7 @@ fun HomeScreen(
                 else -> {
                     LazyVerticalGrid(
                         modifier = Modifier.padding(horizontal = 15.dp),
+                        contentPadding = PaddingValues(vertical = 20.dp),
                         columns = GridCells.Fixed(3),
                         verticalArrangement = Arrangement.spacedBy(15.dp),
                         horizontalArrangement = Arrangement.spacedBy(15.dp)

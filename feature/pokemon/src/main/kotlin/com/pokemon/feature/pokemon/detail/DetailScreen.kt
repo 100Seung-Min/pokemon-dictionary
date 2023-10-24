@@ -3,10 +3,8 @@ package com.pokemon.feature.pokemon.detail
 import android.media.MediaPlayer
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -47,6 +44,7 @@ import com.pokemon.core.ui.component.AttributeItem
 import com.pokemon.core.ui.component.InfoItem
 import com.pokemon.core.ui.component.MoveItem
 import com.pokemon.core.ui.component.descriptionPager
+import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
 
 @Composable
@@ -90,7 +88,7 @@ fun DetailScreen(
                 AsyncImage(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .clickable {
+                        .pokemonClickable {
                             MediaPlayer().apply {
                                 setDataSource("https://play.pokemonshowdown.com/audio/cries/${state.englishName}.ogg")
                                 prepare()
@@ -175,7 +173,7 @@ fun DetailScreen(
                             .size(100.dp)
                             .background(Color.LightGray, CircleShape)
                             .padding(5.dp)
-                            .clickable {
+                            .pokemonClickable {
                                 navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
                             },
                         model = it.profileUrl,

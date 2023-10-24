@@ -1,7 +1,6 @@
 package com.pokemon.core.ui.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -18,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.domain.entity.DetailMoveEntity
+import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
 
 @Composable
@@ -32,7 +32,7 @@ fun PokemonItem(
             .clip(RoundedCornerShape(20.dp))
             .background(backgroundColor ?: PokemonTheme.colors.main)
             .padding(10.dp)
-            .clickable { clickAction() }
+            .pokemonClickable { clickAction() }
     ) {
         AsyncImage(
             model = imageUrl,
@@ -77,7 +77,7 @@ fun MoveItem(
 ) {
     Text(
         modifier = Modifier
-            .clickable { clickAction() }
+            .pokemonClickable { clickAction() }
             .background(
                 item.type.toPokemonType().typeColor,
                 RoundedCornerShape(10.dp)

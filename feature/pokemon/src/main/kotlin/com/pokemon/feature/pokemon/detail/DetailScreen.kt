@@ -55,6 +55,12 @@ fun DetailScreen(
             items(state.flavorList) {
                 Text(text = it)
             }
+            items(state.moveList) {
+                Text(text = it.name)
+                it.flavorList.forEach {
+                    Text(text = it)
+                }
+            }
         }
     }
 }

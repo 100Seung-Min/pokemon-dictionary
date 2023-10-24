@@ -4,6 +4,7 @@ import com.pokemon.core.domain.entity.DetailMoveEntity
 
 data class DetailState(
     val id: Int = 0,
+    val englishName: String = "",
     val profileUrl: String = "",
     val name: String = "",
     val weight: Int = 0,

@@ -1,7 +1,9 @@
 package com.pokemon.feature.pokemon.detail
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -69,7 +71,15 @@ fun DetailScreen(
                 text = "#${"%04d".format(state.id)}"
             )
             AsyncImage(
-                modifier = Modifier.align(Alignment.Center),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .clickable {
+                        MediaPlayer().apply {
+                            setDataSource("https://play.pokemonshowdown.com/audio/cries/${state.englishName}.ogg")
+                            prepare()
+                            start()
+                        }
+                    },
                 model = state.profileUrl, contentDescription = null
             )
         }

@@ -37,6 +37,7 @@ class DetailViewModel @Inject constructor(
                 reduce {
                     state.copy(
                         id = it.id,
+                        englishName = it.englishName,
                         profileUrl = it.profileUrl,
                         name = it.name,
                         genus = it.genus,

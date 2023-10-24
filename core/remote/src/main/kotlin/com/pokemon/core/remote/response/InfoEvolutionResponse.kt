@@ -3,6 +3,8 @@ package com.pokemon.core.remote.response
 import com.google.gson.annotations.SerializedName
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.PokemonEntity
+import com.pokemon.core.remote.util.getId
+import com.pokemon.core.remote.util.toPokemonImageUrl
 
 data class InfoEvolutionResponse(
     @SerializedName("chain")
@@ -22,22 +24,15 @@ data class InfoEvolutionResponse(
 }
 
 fun InfoEvolutionResponse.toEntity(): InfoEvolutionEntity {
-    var id = chain.species.profileUrl.split("/").dropLast(1).last().toInt()
+    var id = chain.species.profileUrl.getId()
     val evolutionList =
-        mutableListOf(
-            listOf(
-                PokemonEntity(
-                    id = id,
-                    profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
-                )
-            )
-        )
+        mutableListOf(listOf(PokemonEntity(id = id, profileUrl = id.toPokemonImageUrl())))
     var nextEvolution = chain.nextEvolution
     while (true) {
         val sameEvolutionList: MutableList<PokemonEntity> = mutableListOf()
         nextEvolution.forEach {
-            id = it.species.profileUrl.split("/").dropLast(1).last().toInt()
-            sameEvolutionList.add(PokemonEntity(id = id, profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"))
+            id = it.species.profileUrl.getId()
+            sameEvolutionList.add(PokemonEntity(id = id, profileUrl = id.toPokemonImageUrl()))
         }
         nextEvolution = nextEvolution.getOrNull(0)?.nextEvolution ?: break
         evolutionList.add(sameEvolutionList)

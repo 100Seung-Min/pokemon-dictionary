@@ -2,6 +2,8 @@ package com.pokemon.core.remote.response
 
 import com.google.gson.annotations.SerializedName
 import com.pokemon.core.domain.entity.DetailPokemonEntity
+import com.pokemon.core.remote.util.getId
+import com.pokemon.core.remote.util.toPokemonImageUrl
 
 data class DetailPokemonResponse(
     @SerializedName("id")
@@ -47,8 +49,8 @@ data class DetailPokemonResponse(
 fun DetailPokemonResponse.toEntity() = DetailPokemonEntity(
     id = id,
     englishName = name,
-    evolutionId = evolutionChain.url.split("/").dropLast(1).last().toInt(),
-    profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
+    evolutionId = evolutionChain.url.getId(),
+    profileUrl = id.toPokemonImageUrl(),
     name = nameList.first { it.language.name == "ko" }.name,
     genus = genusList.first { it.language.name == "ko" }.genus,
     flavorList = flavorList.filter { it.language.name == "ko" }

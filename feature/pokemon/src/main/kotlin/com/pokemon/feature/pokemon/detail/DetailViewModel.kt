@@ -30,7 +30,7 @@ class DetailViewModel @Inject constructor(
                     state.copy(weight = it.weight, height = it.height, typeList = it.typeList)
                 }
                 it.moveList.forEach {
-                    getMoveDetail(moveId = it.toInt())
+                    getMoveDetail(moveId = it)
                 }
             }
         }

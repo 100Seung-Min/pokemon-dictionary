@@ -1,6 +1,8 @@
 package com.pokemon.core.remote.response
 
 import com.pokemon.core.domain.entity.PokemonEntity
+import com.pokemon.core.remote.util.getId
+import com.pokemon.core.remote.util.toPokemonImageUrl
 
 data class PokemonResponse(
     val id: Int,
@@ -8,10 +10,10 @@ data class PokemonResponse(
 )
 
 fun PagingPokemonResponse.Result.toResponse(): PokemonResponse {
-    val id = url.split("/").dropLast(1).last().toInt()
+    val id = url.getId()
     return PokemonResponse(
         id = id,
-        profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
+        profileUrl = id.toPokemonImageUrl()
     )
 }
 

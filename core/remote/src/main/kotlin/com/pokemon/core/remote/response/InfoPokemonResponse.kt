@@ -2,6 +2,7 @@ package com.pokemon.core.remote.response
 
 import com.google.gson.annotations.SerializedName
 import com.pokemon.core.domain.entity.InfoPokemonEntity
+import com.pokemon.core.remote.util.getId
 
 data class InfoPokemonResponse(
     @SerializedName("weight")
@@ -38,5 +39,5 @@ fun InfoPokemonResponse.toEntity() = InfoPokemonEntity(
     weight = weight,
     height = height,
     typeList = typeList.map { it.type.name },
-    moveList = moveList.map { it.move.url.split("/").dropLast(1).last() }
+    moveList = moveList.map { it.move.url.getId() }
 )

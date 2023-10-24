@@ -10,6 +10,8 @@ data class InfoPokemonResponse(
     val height: Int,
     @SerializedName("types")
     val typeList: List<Types>,
+    @SerializedName("moves")
+    val moveList: List<Moves>,
 ) {
     data class Types(
         @SerializedName("type")
@@ -20,10 +22,21 @@ data class InfoPokemonResponse(
             val name: String,
         )
     }
+
+    data class Moves(
+        @SerializedName("move")
+        val move: Move,
+    ) {
+        data class Move(
+            @SerializedName("url")
+            val url: String,
+        )
+    }
 }
 
 fun InfoPokemonResponse.toEntity() = InfoPokemonEntity(
     weight = weight,
     height = height,
-    typeList = typeList.map { it.type.name }
+    typeList = typeList.map { it.type.name },
+    moveList = moveList.map { it.move.url.split("/").dropLast(1).last() }
 )

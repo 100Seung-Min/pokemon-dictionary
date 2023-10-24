@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
+import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
 import com.pokemon.core.remote.response.PokemonResponse
@@ -26,5 +27,9 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonResponse = pokemonApiCall {
         pokemonAPI.getPokemonDetail(pokemonId = pokemonId)
+    }
+
+    override suspend fun getMoveDetail(moveId: Int): DetailMoveResponse = pokemonApiCall {
+        pokemonAPI.getMoveDetail(moveId = moveId)
     }
 }

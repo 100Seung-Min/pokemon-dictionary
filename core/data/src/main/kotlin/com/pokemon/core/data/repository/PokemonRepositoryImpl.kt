@@ -2,6 +2,7 @@ package com.pokemon.core.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
@@ -23,4 +24,7 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonEntity =
         pokemonRemoteDataSource.getPokemonDetail(pokemonId = pokemonId).toEntity()
+
+    override suspend fun getMoveDetail(moveId: Int): DetailMoveEntity =
+        pokemonRemoteDataSource.getMoveDetail(moveId = moveId).toEntity()
 }

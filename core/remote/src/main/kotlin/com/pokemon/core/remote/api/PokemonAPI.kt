@@ -1,5 +1,6 @@
 package com.pokemon.core.remote.api
 
+import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
 import com.pokemon.core.remote.response.PagingPokemonResponse
@@ -24,4 +25,9 @@ interface PokemonAPI {
     suspend fun getPokemonDetail(
         @Path("pokemonId") pokemonId: Int,
     ): DetailPokemonResponse
+
+    @GET("move/{moveId}")
+    suspend fun getMoveDetail(
+        @Path("moveId") moveId: Int,
+    ): DetailMoveResponse
 }

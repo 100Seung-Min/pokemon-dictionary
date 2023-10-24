@@ -8,7 +8,7 @@ data class PokemonResponse(
 )
 
 fun PagingPokemonResponse.Result.toResponse(): PokemonResponse {
-    val id = url.split("/").let { it[it.lastIndex - 1].toInt() }
+    val id = url.split("/").dropLast(1).last().toInt()
     return PokemonResponse(
         id = id,
         profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"

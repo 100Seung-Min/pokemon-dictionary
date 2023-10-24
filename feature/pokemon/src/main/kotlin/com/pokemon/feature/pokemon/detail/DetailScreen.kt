@@ -1,22 +1,41 @@
 package com.pokemon.feature.pokemon.detail
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.ui.util.toPokemonType
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailScreen(
     navController: NavController,
@@ -31,35 +50,94 @@ fun DetailScreen(
         detailViewModel.getPokemonDetail(pokemonId = id)
     }
 
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        LazyColumn {
-            item {
-                AsyncImage(model = state.profileUrl, contentDescription = null)
-                Text(text = state.name)
-                Text(text = "${state.height / 10F}M")
-                Text(text = "${state.weight / 10F}KG")
-                Text(text = state.genus)
-                LazyRow {
-                    items(state.typeList) {
-                        val type = it.toPokemonType()
-                        Text(
-                            text = stringResource(id = type.typeId),
-                            modifier = Modifier.background(type.typeColor)
-                        )
-                    }
-                }
-            }
-            items(state.flavorList) {
-                Text(text = it)
-            }
-            items(state.moveList) {
-                Text(text = it.name)
-                it.flavorList.forEach {
-                    Text(text = it)
-                }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    state.typeList
+                        .getOrNull(0)
+                        ?.toPokemonType()?.typeColor
+                        ?: PokemonTheme.colors.main,
+                    RoundedCornerShape(bottomStart = 15.dp, bottomEnd = 15.dp)
+                )
+        ) {
+            Text(
+                modifier = Modifier.align(Alignment.TopEnd),
+                text = "#${"%04d".format(state.id)}"
+            )
+            AsyncImage(
+                modifier = Modifier.align(Alignment.Center),
+                model = state.profileUrl, contentDescription = null
+            )
+        }
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = state.name,
+            textAlign = TextAlign.Center
+        )
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            items(state.typeList) {
+                val type = it.toPokemonType()
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                        .background(type.typeColor, RoundedCornerShape(10.dp))
+                        .padding(horizontal = 45.dp, vertical = 5.dp),
+                    text = stringResource(id = type.typeId)
+                )
             }
         }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            AttributeText(title = "분류", content = state.genus)
+            Spacer(modifier = Modifier.weight(1F))
+            AttributeText(title = "체중", content = "${state.weight / 10F}KG")
+            Spacer(modifier = Modifier.weight(1F))
+            AttributeText(title = "신장", content = "${state.height / 10F}M")
+        }
+        Text(text = "사용 기술")
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            items(state.moveList) {
+                Text(
+                    modifier = Modifier
+                        .background(
+                            it.type.toPokemonType().typeColor,
+                            RoundedCornerShape(10.dp)
+                        )
+                        .padding(horizontal = 7.dp, vertical = 5.dp), text = it.name
+                )
+            }
+        }
+        Text(text = "상세 설명")
+        val descriptionPagerState = rememberPagerState {
+            state.flavorList.size
+        }
+        HorizontalPager(state = descriptionPagerState) {
+            Text(text = state.flavorList[it])
+        }
+    }
+}
+
+@Composable
+fun AttributeText(
+    title: String,
+    content: String,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = title)
+        Text(text = content)
     }
 }

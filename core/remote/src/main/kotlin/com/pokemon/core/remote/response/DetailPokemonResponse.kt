@@ -6,6 +6,8 @@ import com.pokemon.core.domain.entity.DetailPokemonEntity
 data class DetailPokemonResponse(
     @SerializedName("id")
     val id: Int,
+    @SerializedName("name")
+    val name: String,
     @SerializedName("flavor_text_entries")
     val flavorList: List<Flavor>,
     @SerializedName("genera")
@@ -37,8 +39,10 @@ data class DetailPokemonResponse(
 
 fun DetailPokemonResponse.toEntity() = DetailPokemonEntity(
     id = id,
+    englishName = name,
     profileUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
     name = nameList.first { it.language.name == "ko" }.name,
     genus = genusList.first { it.language.name == "ko" }.genus,
-    flavorList = flavorList.filter { it.language.name == "ko" }.map { it.flavorText.replace("\n", " ") }.distinct()
+    flavorList = flavorList.filter { it.language.name == "ko" }
+        .map { it.flavorText.replace("\n", " ") }.distinct()
 )

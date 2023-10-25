@@ -13,6 +13,8 @@ android {
 }
 dependencies {
     implementation(project(":feature:main"))
+    implementation(project(":feature:academy"))
+    implementation(project(":feature:setting"))
     implementation(project(":feature:pokemon"))
 }
 

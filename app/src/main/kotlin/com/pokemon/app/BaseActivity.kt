@@ -17,9 +17,11 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.navigation.home.MainNavigationItem
+import com.pokemon.feature.academy.navigation.academyGraph
 import com.pokemon.feature.main.navigation.PokemonBottomNavigation
 import com.pokemon.feature.main.navigation.homeGraph
 import com.pokemon.feature.pokemon.navigation.pokemonGraph
+import com.pokemon.feature.setting.navigation.settingGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,6 +72,8 @@ fun BaseApp(modifier: Modifier = Modifier, navController: NavHostController) {
         }
     ) {
         homeGraph(navController = navController)
+        academyGraph(navController = navController)
+        settingGraph(navController = navController)
         pokemonGraph(navController = navController)
     }
 }

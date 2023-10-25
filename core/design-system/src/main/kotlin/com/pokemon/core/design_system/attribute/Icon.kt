@@ -44,5 +44,23 @@ class PokemonIconList private constructor(
             drawableId = R.drawable.ic_next_evolution,
             contentDescription = "nextEvolution"
         )
+
+        @Stable
+        val NavHome = PokemonIconList(
+            drawableId = R.drawable.ic_home,
+            contentDescription = "navHome"
+        )
+
+        @Stable
+        val NavAcademy = PokemonIconList(
+            drawableId = R.drawable.ic_academy,
+            contentDescription = "navAcademy"
+        )
+
+        @Stable
+        val NavSetting = PokemonIconList(
+            drawableId = R.drawable.ic_setting,
+            contentDescription = "navSetting"
+        )
     }
 }

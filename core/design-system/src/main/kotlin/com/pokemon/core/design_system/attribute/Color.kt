@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 data class PokemonColor(
     val main: Color,
+    val text: Color,
     val normal: Color,
     val fighting: Color,
     val flying: Color,
@@ -32,6 +33,7 @@ data class PokemonColor(
 internal val LocalPokemonColors = staticCompositionLocalOf {
     PokemonColor(
         main = Color.Unspecified,
+        text = Color.Unspecified,
         normal = Color.Unspecified,
         fighting = Color.Unspecified,
         flying = Color.Unspecified,
@@ -57,6 +59,7 @@ internal val LocalPokemonColors = staticCompositionLocalOf {
 
 val lightColor = PokemonColor(
     main = Color(0xFFFFFFFF),
+    text = Color(0xFF000000),
     normal = Color(0xFFA8A878),
     fighting = Color(0xFFC03028),
     flying = Color(0xFFA890F0),
@@ -80,7 +83,8 @@ val lightColor = PokemonColor(
 )
 
 val darkColor = PokemonColor(
-    main = Color(0xFFFFFFFF),
+    main = Color(0xFF000000),
+    text = Color(0xFFFFFFFF),
     normal = Color(0xFFA8A878),
     fighting = Color(0xFFC03028),
     flying = Color(0xFFA890F0),

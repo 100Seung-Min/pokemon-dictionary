@@ -31,19 +31,19 @@ fun PokemonBottomNavigation(
     ) {
         itemList.forEach { item ->
             BottomNavigationItem(
-                icon = { PokemonIcon(
-                    icon = item.icon,
-                    alpha = if (currentRoute == item.route) 1F else 0.4F
-                ) },
+                icon = {
+                    PokemonIcon(
+                        icon = item.icon,
+                        alpha = if (currentRoute == item.route) 1F else 0.4F
+                    )
+                },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Gray,
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
                         navController.graph.startDestinationRoute?.let { screenRoute ->
-                            popUpTo(screenRoute) {
-                                saveState = true
-                            }
+                            popUpTo(screenRoute)
                         }
                         launchSingleTop = true
                         restoreState = true

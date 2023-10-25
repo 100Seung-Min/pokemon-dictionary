@@ -3,13 +3,11 @@ package com.pokemon.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -35,6 +33,7 @@ class BaseActivity : ComponentActivity() {
             navController = rememberAnimatedNavController()
             PokemonTheme {
                 Scaffold(
+                    backgroundColor = PokemonTheme.colors.main,
                     bottomBar = { PokemonBottomNavigation(navController = navController) },
                     content = {
                         BaseApp(
@@ -55,21 +54,10 @@ fun BaseApp(modifier: Modifier = Modifier, navController: NavHostController) {
         modifier = modifier,
         navController = navController,
         startDestination = MainNavigationItem.Main.route,
-        enterTransition = {
-            slideInHorizontally(
-                initialOffsetX = { it * 2 }, animationSpec = tween(
-                    durationMillis = 500
-                )
-            )
-        },
-        popEnterTransition = { fadeIn(animationSpec = tween(durationMillis = 500)) },
-        popExitTransition = {
-            slideOutHorizontally(
-                targetOffsetX = { it * 2 }, animationSpec = tween(
-                    durationMillis = 500
-                )
-            )
-        }
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None }
     ) {
         homeGraph(navController = navController)
         academyGraph(navController = navController)

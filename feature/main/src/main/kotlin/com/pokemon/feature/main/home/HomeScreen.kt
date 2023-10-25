@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -16,6 +15,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.pokemon.core.design_system.component.PokemonBackground
+import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
 import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
 import com.pokemon.core.ui.component.PokemonItem
@@ -33,16 +34,13 @@ fun HomeScreen(
 
     val pokemonPager = state.pokemonListPager?.collectAsLazyPagingItems()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+    PokemonBackground {
         pokemonPager?.let {
             when (it.loadState.refresh) {
                 is LoadState.Loading -> {}
                 is LoadState.Error -> {}
                 else -> {
-                    LazyVerticalGrid(
+                    RemoveOverScrollLazyVerticalGrid(
                         modifier = Modifier.padding(horizontal = 15.dp),
                         contentPadding = PaddingValues(vertical = 20.dp),
                         columns = GridCells.Fixed(3),

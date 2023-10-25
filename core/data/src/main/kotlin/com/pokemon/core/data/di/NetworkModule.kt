@@ -17,8 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
-    fun provideOkHttpclient(): OkHttpClient {
+    fun provideOkHttpclient(
+        @ApplicationContext context: Context,
+    ): OkHttpClient {
         return OkHttpClient.Builder()
+            .cache(Cache(context.cacheDir, 20L * 1024 * 1024))
             .build()
     }
 

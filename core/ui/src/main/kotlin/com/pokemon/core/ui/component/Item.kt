@@ -1,10 +1,14 @@
 package com.pokemon.core.ui.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,11 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
+import com.pokemon.core.design_system.attribute.PokemonIcon
+import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.domain.entity.DetailMoveEntity
+import com.pokemon.core.ui.model.AcademyMenuModel
+import com.pokemon.core.ui.model.QuizModel
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
 
@@ -83,5 +92,41 @@ fun MoveItem(
                 RoundedCornerShape(10.dp)
             )
             .padding(horizontal = 7.dp, vertical = 5.dp), text = item.name
+    )
+}
+
+@Composable
+fun AcademyMenuItem(
+    item: AcademyMenuModel,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 15.dp)
+            .fillMaxWidth()
+            .background(item.backgroundColor, RoundedCornerShape(20.dp))
+            .padding(horizontal = 20.dp, vertical = 10.dp)
+            .pokemonClickable { onClick() },
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        PokemonText(text = item.title)
+        PokemonIcon(modifier = Modifier.size(130.dp), icon = item.icon)
+    }
+}
+
+@Composable
+fun QuizItem(
+    item: QuizModel,
+    onClick: (Int) -> Unit,
+) {
+    PokemonText(
+        modifier = Modifier
+            .padding(horizontal = 15.dp)
+            .fillMaxWidth()
+            .background(Color.LightGray, RoundedCornerShape(20.dp))
+            .padding(vertical = 10.dp)
+            .pokemonClickable { onClick(item.id) },
+        text = item.name,
+        textAlign = TextAlign.Center
     )
 }

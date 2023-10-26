@@ -1,5 +1,6 @@
 package com.pokemon.core.ui.component
 
+import android.os.Handler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +33,7 @@ import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.model.QuizModel
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
+import kotlinx.coroutines.delay
 
 @Composable
 fun PokemonItem(
@@ -117,15 +123,27 @@ fun AcademyMenuItem(
 @Composable
 fun QuizItem(
     item: QuizModel,
-    onClick: (Int) -> Unit,
+    answerId: Int,
+    onClick: (Boolean) -> Unit,
 ) {
+    var backgroundColor: Boolean? by remember { mutableStateOf(null) }
     PokemonText(
         modifier = Modifier
             .padding(horizontal = 15.dp)
             .fillMaxWidth()
-            .background(Color.LightGray, RoundedCornerShape(20.dp))
+            .background(
+                if (backgroundColor == null) Color.LightGray else if (backgroundColor == true) Color.Green else Color.Red,
+                RoundedCornerShape(20.dp)
+            )
             .padding(vertical = 10.dp)
-            .pokemonClickable { onClick(item.id) },
+            .pokemonClickable {
+                if (item.name.isNotEmpty()) {
+                    backgroundColor = item.id == answerId
+                    Handler().postDelayed({
+                        onClick(item.id == answerId)
+                    }, 1000)
+                }
+            },
         text = item.name,
         textAlign = TextAlign.Center
     )

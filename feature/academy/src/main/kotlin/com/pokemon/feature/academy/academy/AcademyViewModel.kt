@@ -17,7 +17,12 @@ class AcademyViewModel @Inject constructor(
     override val container = container<AcademyState, Unit>(AcademyState())
 
     fun setQuizList() = intent {
-        reduce { state.copy(quizList = (1..1017).toList().shuffled().take(20)) }
+        reduce {
+            state.copy(
+                quizList = (1..1017).toList().shuffled().take(20),
+                answerList = listOf()
+            )
+        }
     }
 
     fun getEasyQuiz(index: Int) = intent {
@@ -34,5 +39,9 @@ class AcademyViewModel @Inject constructor(
         }.onSuccess {
             reduce { state.copy(easyQuiz = quizList.shuffled()) }
         }
+    }
+
+    fun addAnswer(isAnswer: Boolean) = intent {
+        reduce { state.copy(answerList = state.answerList.plus(isAnswer)) }
     }
 }

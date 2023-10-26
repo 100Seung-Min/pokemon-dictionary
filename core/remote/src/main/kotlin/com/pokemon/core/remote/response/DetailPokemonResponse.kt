@@ -46,12 +46,12 @@ data class DetailPokemonResponse(
     )
 }
 
-fun DetailPokemonResponse.toEntity() = DetailPokemonEntity(
+fun DetailPokemonResponse.toEntity(languageId: String) = DetailPokemonEntity(
     id = id,
     englishName = name,
     evolutionId = evolutionChain.url.getId(),
-    name = nameList.firstOrNull { it.language.name == "ko" }?.name ?: name,
-    genus = genusList.firstOrNull { it.language.name == "ko" }?.genus ?: "",
-    flavorList = flavorList.filter { it.language.name == "ko" }
+    name = nameList.firstOrNull { it.language.name == languageId }?.name ?: name,
+    genus = genusList.firstOrNull { it.language.name == languageId }?.genus ?: "",
+    flavorList = flavorList.filter { it.language.name == languageId }
         .map { it.flavorText.replace("\n", " ") }.distinct()
 )

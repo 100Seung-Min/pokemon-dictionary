@@ -31,9 +31,9 @@ data class DetailMoveResponse(
     )
 }
 
-fun DetailMoveResponse.toEntity() = DetailMoveEntity(
-    name = nameList.first { it.language.name == "ko" }.name,
+fun DetailMoveResponse.toEntity(languageId: String) = DetailMoveEntity(
+    name = nameList.first { it.language.name == languageId }.name,
     type = type.name,
-    flavorList = flavorList.filter { it.language.name == "ko" }
+    flavorList = flavorList.filter { it.language.name == languageId }
         .map { it.flavorText.replace("\n", " ") }.distinct()
 )

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,6 +20,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
+import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.navigation.academy.AcademyDeepLinkKey
 import com.pokemon.core.navigation.academy.AcademyNavigationItem
 import com.pokemon.core.ui.component.QuizItem
@@ -43,7 +43,7 @@ fun EasyScreen(
         }
     }
     PokemonBackground(isLoading = isLoading) {
-        LazyColumn(
+        RemoveOverScrollLazyColumn(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             item {

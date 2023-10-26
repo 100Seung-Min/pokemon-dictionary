@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -33,6 +34,11 @@ fun HomeScreen(
     val sideEffect = container.sideEffectFlow
 
     val pokemonPager = state.pokemonListPager?.collectAsLazyPagingItems()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        homeViewModel.settingLanguage(context)
+    }
 
     PokemonBackground {
         pokemonPager?.let {

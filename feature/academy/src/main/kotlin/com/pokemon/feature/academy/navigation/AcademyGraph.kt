@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.composable
+import com.pokemon.core.design_system.component.animateComposable
 import com.pokemon.core.navigation.academy.AcademyDeepLinkKey
 import com.pokemon.core.navigation.academy.AcademyNavigationItem
 import com.pokemon.feature.academy.academy.AcademyScreen
@@ -20,7 +21,7 @@ fun NavGraphBuilder.academyGraph(navController: NavController) {
         AcademyScreen(navController = navController)
     }
 
-    composable(
+    animateComposable(
         route = AcademyNavigationItem.Easy.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
@@ -33,7 +34,7 @@ fun NavGraphBuilder.academyGraph(navController: NavController) {
         EasyScreen(navController = navController, quizId = quizId)
     }
 
-    composable(
+    animateComposable(
         route = AcademyNavigationItem.Normal.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
@@ -46,7 +47,7 @@ fun NavGraphBuilder.academyGraph(navController: NavController) {
         NormalScreen()
     }
 
-    composable(
+    animateComposable(
         route = AcademyNavigationItem.Hard.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
@@ -59,7 +60,9 @@ fun NavGraphBuilder.academyGraph(navController: NavController) {
         HardScreen()
     }
 
-    composable(route = AcademyNavigationItem.Result.route) {
+    animateComposable(
+        route = AcademyNavigationItem.Result.route,
+    ) {
         ResultScreen()
     }
 }

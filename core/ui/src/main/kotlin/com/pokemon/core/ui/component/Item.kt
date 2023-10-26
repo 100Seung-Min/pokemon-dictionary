@@ -124,6 +124,8 @@ fun AcademyMenuItem(
 fun QuizItem(
     item: QuizModel,
     answerId: Int,
+    isSelected: Boolean,
+    onSelected: () -> Unit,
     onClick: (Boolean) -> Unit,
 ) {
     var backgroundColor: Boolean? by remember { mutableStateOf(null) }
@@ -137,7 +139,8 @@ fun QuizItem(
             )
             .padding(vertical = 10.dp)
             .pokemonClickable {
-                if (item.name.isNotEmpty()) {
+                onSelected()
+                if (item.name.isNotEmpty() && !isSelected) {
                     backgroundColor = item.id == answerId
                     Handler().postDelayed({
                         onClick(item.id == answerId)

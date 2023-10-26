@@ -36,6 +36,7 @@ fun EasyScreen(
     val container = academyViewModel.container
     val state = container.stateFlow.collectAsState().value
     var isLoading by remember { mutableStateOf(true) }
+    var isSelected by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         academyViewModel.getEasyQuiz(quizId) {
             isLoading = false
@@ -65,7 +66,12 @@ fun EasyScreen(
                 }
             }
             items(state.easyQuiz) {
-                QuizItem(item = it, answerId = state.quizList[quizId]) {
+                QuizItem(
+                    item = it,
+                    answerId = state.quizList[quizId],
+                    isSelected = isSelected,
+                    onSelected = { isSelected = true }
+                ) {
                     academyViewModel.addAnswer(isAnswer = it)
                     if (quizId < 19) navController.navigate(AcademyNavigationItem.Easy.route + AcademyDeepLinkKey.QuizId + (quizId + 1)) {
                         popUpTo(AcademyNavigationItem.Academy.route)

@@ -59,12 +59,15 @@ fun DetailScreen(
     val sideEffect = container.sideEffectFlow
     var moveDescriptionVisible by remember { mutableStateOf(false) }
     var selectedMove: DetailMoveEntity? by remember { mutableStateOf(null) }
+    var isLoading by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        detailViewModel.getPokemonInfo(pokemonId = id)
+        detailViewModel.getPokemonInfo(pokemonId = id) {
+            isLoading = false
+        }
     }
 
-    PokemonBackground {
+    PokemonBackground(isLoading = isLoading) {
         RemoveOverScrollLazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {

@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
 ) : ContainerHost<DetailState, Unit>, ViewModel() {
     override val container = container<DetailState, Unit>(DetailState())
 
-    suspend fun getPokemonInfo(pokemonId: Int) = intent {
+    suspend fun getPokemonInfo(pokemonId: Int, finishLoading: () -> Unit) = intent {
         viewModelScope.launch {
             getPokemonInfoUseCase(pokemonId = pokemonId).onSuccess {
                 reduce {
@@ -37,12 +37,12 @@ class DetailViewModel @Inject constructor(
                 it.moveList.forEach {
                     getMoveDetail(moveId = it)
                 }
-                getPokemonDetail(pokemonId = it.speciesId)
+                getPokemonDetail(pokemonId = it.speciesId, finishLoading = finishLoading)
             }
         }
     }
 
-    private suspend fun getPokemonDetail(pokemonId: Int) = intent {
+    private suspend fun getPokemonDetail(pokemonId: Int, finishLoading: () -> Unit) = intent {
         viewModelScope.launch {
             getPokemonDetailUseCase(pokemonId = pokemonId).onSuccess {
                 reduce {
@@ -54,7 +54,7 @@ class DetailViewModel @Inject constructor(
                         flavorList = it.flavorList
                     )
                 }
-                getEvolutionInfo(evolutionId = it.evolutionId)
+                getEvolutionInfo(evolutionId = it.evolutionId, finishLoading = finishLoading)
             }
         }
     }
@@ -72,10 +72,11 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getEvolutionInfo(evolutionId: Int) = intent {
+    private suspend fun getEvolutionInfo(evolutionId: Int, finishLoading: () -> Unit) = intent {
         viewModelScope.launch {
             getEvolutionInfoUseCase(evolutionId = evolutionId).onSuccess {
                 reduce { state.copy(evolutionList = it.evolutionList) }
+                finishLoading()
             }
         }
     }

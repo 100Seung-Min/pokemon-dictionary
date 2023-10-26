@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">포켓몬 사전</string>
-
-    <!--    번역 언어-->
-    <string name="setting_language">언어 설정</string>
-    <string name="korean" translatable="false">한국어</string>
-    <string name="japanese" translatable="false">日本語</string>
-    <string name="chinese" translatable="false">中国人</string>
-    <string name="english" translatable="false">English</string>
-    <string name="french" translatable="false">Français</string>
-    <string name="italian" translatable="false">Italiano</string>
-    <string name="spanish" translatable="false">Español</string>
-    <string name="german" translatable="false">Deutsch</string>
-
-    <!--    포켓몬 타입-->
     <string name="normal">노말</string>
     <string name="fighting">격투</string>
     <string name="flying">비행</string>
@@ -32,14 +19,12 @@
     <string name="dragon">드래곤</string>
     <string name="dark">악</string>
     <string name="fairy">페어리</string>
-    <string name="unknown" translatable="false">\?\?\?</string>
     <string name="shadow">다크</string>
-
-    <!--    디테일 페이지-->
     <string name="genus">분류</string>
     <string name="weight">체중</string>
     <string name="height">신장</string>
-    <string name="abilities">사용 기술</string>
     <string name="description">상세 설명</string>
     <string name="evolution">진화 트리</string>
+    <string name="abilities">사용 기술</string>
+    <string name="setting_language">언어 설정</string>
 </resources>

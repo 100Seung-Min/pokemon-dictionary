@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">포켓몬 사전</string>
+    <string name="normal">ノーマル</string>
+    <string name="fighting">かくとう</string>
+    <string name="flying">ひこう</string>
+    <string name="poison">どく</string>
+    <string name="ground">じめん</string>
+    <string name="rock">いわ</string>
+    <string name="bug">むし</string>
+    <string name="ghost">ゴースト</string>
+    <string name="steel">はがね</string>
+    <string name="fire">ほのお</string>
+    <string name="water">みず</string>
+    <string name="grass">くさ</string>
+    <string name="electric">でんき</string>
+    <string name="psychic">エスパー</string>
+    <string name="ice">こおり</string>
+    <string name="dragon">ドラゴン</string>
+    <string name="dark">あく</string>
+    <string name="fairy">フェアリー</string>
+    <string name="shadow">ダーク</string>
+    <string name="genus">属</string>
+    <string name="weight">重さ</string>
+    <string name="height">身長</string>
+    <string name="description">説明</string>
+    <string name="evolution">進化</string>
+    <string name="abilities">能力</string>
+    <string name="setting_language">言語設定</string>
+</resources>

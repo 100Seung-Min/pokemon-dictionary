@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">포켓몬 사전</string>
+    <string name="normal">Normal</string>
+    <string name="fighting">Combat</string>
+    <string name="flying">Vol</string>
+    <string name="poison">Poison</string>
+    <string name="ground">Sol</string>
+    <string name="rock">Roche</string>
+    <string name="bug">Insecte</string>
+    <string name="ghost">Spectre</string>
+    <string name="steel">Acier</string>
+    <string name="fire">Feu</string>
+    <string name="water">Eau</string>
+    <string name="grass">Plante</string>
+    <string name="electric">Électrik</string>
+    <string name="psychic">Psy</string>
+    <string name="ice">Glace</string>
+    <string name="dragon">Dragon</string>
+    <string name="dark">Ténèbres</string>
+    <string name="fairy">Fée</string>
+    <string name="shadow">Obscur</string>
+    <string name="genus">Genre</string>
+    <string name="weight">Poids</string>
+    <string name="height">Hauteur</string>
+    <string name="description">Description</string>
+    <string name="evolution">Évolution</string>
+    <string name="abilities">Capacités</string>
+    <string name="setting_language">Paramètres de langue</string>
+</resources>

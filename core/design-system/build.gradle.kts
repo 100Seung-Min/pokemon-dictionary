@@ -15,4 +15,5 @@ android {
 dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.coil)
+    implementation(libs.lottie)
 }

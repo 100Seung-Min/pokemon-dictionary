@@ -32,7 +32,7 @@ androidJunit = "1.1.5"
 espressoCore = "3.5.1"
 coil = "2.2.2"
 inject = "1"
-com-google-android-material-material = "1.8.0"
+lottie = "6.1.0"
 
 [libraries]
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "pluginAndroid" }
@@ -73,12 +73,12 @@ okhttp-sse = { module = "com.squareup.okhttp3:okhttp-sse", version.ref = "okhttp
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 inject = { module = "javax.inject:javax.inject", version.ref = "inject" }
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 test-junit = { module = "junit:junit", version.ref = "junit" }
 test-mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 test-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 test-anroid-junit = { module = "androidx.test.ext:junit", version.ref = "androidJunit" }
 test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
-material = { group = "com.google.android.material", name = "material", version.ref = "com-google-android-material-material" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

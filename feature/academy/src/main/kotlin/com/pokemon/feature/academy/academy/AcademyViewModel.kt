@@ -31,7 +31,7 @@ class AcademyViewModel @Inject constructor(
         reduce { state.copy(easyQuiz = List(5) { QuizModel(id = 0, name = "") }) }
         kotlin.runCatching {
             for (i in 0..4) {
-                val plusIndex = if (quizNumber < 5) i else i * -1
+                val plusIndex = if (quizNumber < 500) i * 5 else i * -5
                 getPokemonDetailUseCase(quizNumber + plusIndex).onSuccess {
                     quizList.add(QuizModel(id = it.id, name = it.name))
                 }

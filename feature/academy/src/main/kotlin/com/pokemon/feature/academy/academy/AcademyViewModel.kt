@@ -25,7 +25,7 @@ class AcademyViewModel @Inject constructor(
         }
     }
 
-    fun getEasyQuiz(index: Int) = intent {
+    fun getEasyQuiz(index: Int, finishLoading: () -> Unit) = intent {
         val quizNumber = state.quizList[index]
         val quizList = mutableListOf<QuizModel>()
         reduce { state.copy(easyQuiz = List(5) { QuizModel(id = 0, name = "") }) }
@@ -38,6 +38,7 @@ class AcademyViewModel @Inject constructor(
             }
         }.onSuccess {
             reduce { state.copy(easyQuiz = quizList.shuffled()) }
+            finishLoading()
         }
     }
 

@@ -62,5 +62,23 @@ class PokemonIconList private constructor(
             drawableId = R.drawable.ic_setting,
             contentDescription = "navSetting"
         )
+
+        @Stable
+        val Easy = PokemonIconList(
+            drawableId = R.drawable.ic_easy,
+            contentDescription = "easy"
+        )
+
+        @Stable
+        val Normal = PokemonIconList(
+            drawableId = R.drawable.ic_normal,
+            contentDescription = "normal"
+        )
+
+        @Stable
+        val Hard = PokemonIconList(
+            drawableId = R.drawable.ic_hard,
+            contentDescription = "hard"
+        )
     }
 }

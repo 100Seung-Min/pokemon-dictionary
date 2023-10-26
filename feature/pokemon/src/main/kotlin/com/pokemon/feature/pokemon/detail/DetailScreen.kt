@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -47,6 +48,7 @@ import com.pokemon.core.ui.component.MoveItem
 import com.pokemon.core.ui.component.descriptionPager
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
+import com.pokemon.core.design_system.R
 
 @Composable
 fun DetailScreen(
@@ -124,14 +126,24 @@ fun DetailScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp)
                 ) {
-                    InfoItem(title = "분류", content = state.genus)
+                    InfoItem(title = stringResource(id = R.string.genus), content = state.genus)
                     Spacer(modifier = Modifier.weight(1F))
-                    InfoItem(title = "체중", content = "${state.weight / 10F}KG")
+                    InfoItem(
+                        title = stringResource(id = R.string.weight),
+                        content = "${state.weight / 10F}KG"
+                    )
                     Spacer(modifier = Modifier.weight(1F))
-                    InfoItem(title = "신장", content = "${state.height / 10F}M")
+                    InfoItem(
+                        title = stringResource(id = R.string.height),
+                        content = "${state.height / 10F}M"
+                    )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                PokemonText(modifier = Modifier.padding(horizontal = 15.dp), text = "사용 기술")
+                PokemonText(
+                    modifier = Modifier.padding(horizontal = 15.dp), text = stringResource(
+                        id = R.string.abilities
+                    )
+                )
                 Spacer(modifier = Modifier.height(4.dp))
                 RemoveOverScrollLazyRow(
                     contentPadding = PaddingValues(horizontal = 15.dp),
@@ -159,11 +171,19 @@ fun DetailScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                PokemonText(modifier = Modifier.padding(horizontal = 15.dp), text = "상세 설명")
+                PokemonText(
+                    modifier = Modifier.padding(horizontal = 15.dp), text = stringResource(
+                        id = R.string.description
+                    )
+                )
                 Spacer(modifier = Modifier.height(4.dp))
                 descriptionPager(descriptionList = state.flavorList)
                 Spacer(modifier = Modifier.height(16.dp))
-                PokemonText(modifier = Modifier.padding(horizontal = 15.dp), text = "진화도")
+                PokemonText(
+                    modifier = Modifier.padding(horizontal = 15.dp), text = stringResource(
+                        id = R.string.evolution
+                    )
+                )
                 Spacer(modifier = Modifier.height(4.dp))
             }
             items(state.evolutionList) {

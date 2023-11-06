@@ -2,6 +2,7 @@ package com.pokemon.core.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.pokemon.core.domain.entity.DetailItemEntity
 import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
@@ -47,4 +48,12 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override suspend fun getItemList(): Flow<PagingData<ItemEntity>> =
         pokemonRemoteDataSource.getItemList().map { it.map { it.toEntity() } }
+
+    override suspend fun getItemDetail(itemId: Int): DetailItemEntity {
+        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
+        if (languageId == "ja") languageId = "ja-Hrkt"
+        else if (languageId == "zh") languageId = "zh-Hant"
+        return pokemonRemoteDataSource.getItemDetail(itemId = itemId)
+            .toEntity(languageId = languageId)
+    }
 }

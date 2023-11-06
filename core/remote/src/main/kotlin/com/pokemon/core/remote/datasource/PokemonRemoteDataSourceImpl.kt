@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.pagingsource.ItemPagingSource
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
+import com.pokemon.core.remote.response.DetailItemResponse
 import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
 import com.pokemon.core.remote.response.InfoEvolutionResponse
@@ -46,4 +47,7 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
         Pager(config = PagingConfig(pageSize = PAGING_SIZE), pagingSourceFactory = {
             ItemPagingSource(pokemonAPI = pokemonAPI)
         }).flow
+
+    override suspend fun getItemDetail(itemId: Int): DetailItemResponse =
+        pokemonApiCall { pokemonAPI.getItemDetail(itemId = itemId) }
 }

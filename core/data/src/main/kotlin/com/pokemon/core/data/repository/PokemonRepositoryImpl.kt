@@ -6,6 +6,7 @@ import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
+import com.pokemon.core.domain.entity.ItemEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.domain.repository.PokemonRepository
 import com.pokemon.core.local.datasource.SystemLocalDataSource
@@ -43,4 +44,7 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionEntity =
         pokemonRemoteDataSource.getEvolutionInfo(evolutionId = evolutionId).toEntity()
+
+    override suspend fun getItemList(): Flow<PagingData<ItemEntity>> =
+        pokemonRemoteDataSource.getItemList().map { it.map { it.toEntity() } }
 }

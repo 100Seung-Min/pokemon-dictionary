@@ -26,11 +26,7 @@ fun PokemonBottomNavigation(
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val itemList = listOf(
-        BottomNavigationItem.Home,
-        BottomNavigationItem.Academy,
-        BottomNavigationItem.Setting
-    )
+    val itemList = BottomNavigationItem.values().toList()
     AnimatedVisibility(
         visible = itemList.map { it.route }.contains(currentRoute),
         enter = slideInVertically(

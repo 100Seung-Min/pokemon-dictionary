@@ -16,5 +16,6 @@ dependencies {
     implementation(project(":feature:academy"))
     implementation(project(":feature:setting"))
     implementation(project(":feature:pokemon"))
+    implementation(project(":feature:item"))
 }
 

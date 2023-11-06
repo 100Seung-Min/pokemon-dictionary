@@ -52,6 +52,12 @@ class PokemonIconList private constructor(
         )
 
         @Stable
+        val NavItem = PokemonIconList(
+            drawableId = R.drawable.ic_item,
+            contentDescription = "navItem"
+        )
+
+        @Stable
         val NavAcademy = PokemonIconList(
             drawableId = R.drawable.ic_academy,
             contentDescription = "navAcademy"

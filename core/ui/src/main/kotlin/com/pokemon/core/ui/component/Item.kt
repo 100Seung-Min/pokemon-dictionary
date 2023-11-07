@@ -84,7 +84,7 @@ fun AttributeFilterItem(
     PokemonText(
         modifier = Modifier
             .background(
-                type.typeColor.copy(alpha = if (isSelected) 1F else 0.5F),
+                type.typeColor.copy(alpha = if (isSelected) 1F else 0.2F),
                 RoundedCornerShape(10.dp)
             )
             .padding(horizontal = 5.dp, vertical = 3.dp)

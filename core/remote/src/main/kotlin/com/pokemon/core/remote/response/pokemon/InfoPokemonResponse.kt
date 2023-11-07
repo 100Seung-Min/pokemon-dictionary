@@ -5,8 +5,6 @@ import com.pokemon.core.remote.response.util.TypeResponse
 import com.pokemon.core.remote.response.util.URLResponse
 
 data class InfoPokemonResponse(
-    @SerializedName("id")
-    val id: Int,
     @SerializedName("weight")
     val weight: Int,
     @SerializedName("height")
@@ -17,6 +15,8 @@ data class InfoPokemonResponse(
     val moveList: List<Moves>,
     @SerializedName("species")
     val species: URLResponse,
+    @SerializedName("sprites")
+    val sprites: Sprites,
 ) {
     data class Types(
         @SerializedName("type")
@@ -27,4 +27,19 @@ data class InfoPokemonResponse(
         @SerializedName("move")
         val move: URLResponse,
     )
+
+    data class Sprites(
+        @SerializedName("other")
+        val other: Other,
+    ) {
+        data class Other(
+            @SerializedName("official-artwork")
+            val officialArtwork: OfficialArtwork,
+        ) {
+            data class OfficialArtwork(
+                @SerializedName("front_default")
+                val imageUrl: String?,
+            )
+        }
+    }
 }

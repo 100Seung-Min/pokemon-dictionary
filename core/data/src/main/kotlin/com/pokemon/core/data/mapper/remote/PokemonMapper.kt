@@ -18,7 +18,7 @@ fun URLResponse.toPokemonEntity(): PokemonEntity {
 }
 
 fun InfoPokemonResponse.toEntity() = InfoPokemonEntity(
-    profileUrl = id.toPokemonImageUrl(),
+    profileUrl = sprites.other.officialArtwork.imageUrl ?: "",
     speciesId = species.url.getId(),
     weight = weight,
     height = height,

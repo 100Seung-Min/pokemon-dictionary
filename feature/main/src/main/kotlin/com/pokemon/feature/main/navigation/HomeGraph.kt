@@ -8,8 +8,8 @@ import com.pokemon.core.navigation.home.MainNavigationItem
 import com.pokemon.feature.main.home.HomeScreen
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.homeGraph(navController: NavController) {
+fun NavGraphBuilder.homeGraph(navController: NavController, changeDarkTheme: (Boolean) -> Unit) {
     composable(route = MainNavigationItem.Main.route) {
-        HomeScreen(navController = navController)
+        HomeScreen(navController = navController, changeDarkTheme = changeDarkTheme)
     }
 }

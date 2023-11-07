@@ -12,4 +12,10 @@ class SystemRepositoryImpl @Inject constructor(
 
     override suspend fun fetchLanguage(): String? =
         systemLocalDataSource.fetchLanguage()
+
+    override suspend fun saveIsDarkTheme(isDarkTheme: Boolean) =
+        systemLocalDataSource.saveIsDarkTheme(isDarkTheme = isDarkTheme)
+
+    override suspend fun fetchIsDarkTheme(): Boolean =
+        systemLocalDataSource.fetchIsDarkTheme()
 }

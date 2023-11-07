@@ -6,4 +6,8 @@ interface SystemLocalDataSource {
     suspend fun fetchLanguage(): String?
 
     suspend fun fetchLanguageId(): String
+
+    suspend fun saveIsDarkTheme(isDarkTheme: Boolean)
+
+    suspend fun fetchIsDarkTheme(): Boolean
 }

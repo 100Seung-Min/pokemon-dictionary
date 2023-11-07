@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -27,6 +26,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonBottomSheet
+import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
 import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
@@ -42,6 +42,7 @@ import com.pokemon.core.ui.util.typeList
 @Composable
 fun HomeScreen(
     navController: NavController,
+    changeDarkTheme: (Boolean) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(getActivity()),
 ) {
     val container = homeViewModel.container
@@ -67,12 +68,16 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(state.isDarkTheme) {
+        changeDarkTheme(state.isDarkTheme)
+    }
+
     PokemonBottomSheet(
         sheetContent = {
             Column(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp)
             ) {
-                Text(text = "속성")
+                PokemonText(text = "속성")
                 Spacer(modifier = Modifier.height(6.dp))
                 RemoveOverScrollLazyVerticalGrid(
                     columns = GridCells.Fixed(4),
@@ -89,7 +94,7 @@ fun HomeScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(text = "세대")
+                PokemonText(text = "세대")
                 Spacer(modifier = Modifier.height(6.dp))
                 RemoveOverScrollLazyVerticalGrid(
                     columns = GridCells.Fixed(3),
@@ -124,7 +129,7 @@ fun HomeScreen(
                             bottomSheetAction()
                         }
                 ) {
-                    Text(text = "필터")
+                    PokemonText(text = "필터")
                 }
             }
             Spacer(modifier = Modifier.height(6.dp))

@@ -9,6 +9,10 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -32,14 +36,17 @@ class BaseActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             navController = rememberAnimatedNavController()
-            PokemonTheme {
+            var isDarkTheme by remember { mutableStateOf(false) }
+
+            PokemonTheme(darkTheme = isDarkTheme) {
                 Scaffold(
                     backgroundColor = PokemonTheme.colors.main,
                     bottomBar = { PokemonBottomNavigation(navController = navController) },
                     content = {
                         BaseApp(
                             modifier = Modifier.padding(it),
-                            navController = navController
+                            navController = navController,
+                            changeDarkTheme = { isDarkTheme = it }
                         )
                     }
                 )
@@ -50,7 +57,11 @@ class BaseActivity : ComponentActivity() {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun BaseApp(modifier: Modifier = Modifier, navController: NavHostController) {
+fun BaseApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    changeDarkTheme: (Boolean) -> Unit,
+) {
     AnimatedNavHost(
         modifier = modifier,
         navController = navController,
@@ -60,10 +71,10 @@ fun BaseApp(modifier: Modifier = Modifier, navController: NavHostController) {
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None }
     ) {
-        homeGraph(navController = navController)
+        homeGraph(navController = navController, changeDarkTheme = changeDarkTheme)
         itemGraph(navController = navController)
         academyGraph(navController = navController)
-        settingGraph(navController = navController)
+        settingGraph(navController = navController, changeDarkTheme = changeDarkTheme)
         pokemonGraph(navController = navController)
     }
 }

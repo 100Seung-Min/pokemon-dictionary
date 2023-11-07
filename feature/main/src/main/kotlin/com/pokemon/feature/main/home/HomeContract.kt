@@ -15,4 +15,5 @@ data class HomeState(
     val generationList: List<DetailGenerationEntity> = listOf(),
     val selectedGenerationList: List<DetailGenerationEntity> = listOf(),
     val selectedTypeList: List<String> = listOf(),
+    val isDarkTheme: Boolean = false,
 )

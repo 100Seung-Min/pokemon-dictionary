@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,11 +26,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.attribute.PokemonIcon
-import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.util.Language
 import com.pokemon.core.design_system.util.changeLanguage
@@ -40,7 +37,6 @@ import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.model.QuizModel
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
-import kotlinx.coroutines.delay
 
 @Composable
 fun PokemonItem(
@@ -222,17 +218,20 @@ fun GenerationItem(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    Text(
+    PokemonText(
         modifier = Modifier
             .background(
                 color = if (isSelected) Color.Cyan else Color.Transparent,
                 shape = RoundedCornerShape(20.dp)
             )
-            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(20.dp))
+            .border(
+                width = 1.dp,
+                color = PokemonTheme.colors.text,
+                shape = RoundedCornerShape(20.dp)
+            )
             .padding(vertical = 3.dp, horizontal = 5.dp)
             .pokemonClickable { onClick() },
         text = name,
-        fontSize = 12.sp,
         textAlign = TextAlign.Center
     )
 }

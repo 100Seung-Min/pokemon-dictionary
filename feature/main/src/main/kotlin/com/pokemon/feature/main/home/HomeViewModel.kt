@@ -13,6 +13,7 @@ import com.pokemon.core.domain.usecase.generation.GetGenerationListUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonInfoUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonListUseCase
+import com.pokemon.core.domain.usecase.system.FetchIsDarkThemeUseCase
 import com.pokemon.core.domain.usecase.system.FetchLanguageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class HomeViewModel @Inject constructor(
     private val fetchLanguageUseCase: FetchLanguageUseCase,
     private val getGenerationListUseCase: GetGenerationListUseCase,
     private val getGenerationDetailUseCase: GetGenerationDetailUseCase,
+    private val fetchIsDarkThemeUseCase: FetchIsDarkThemeUseCase,
 ) : ContainerHost<HomeState, Unit>, ViewModel() {
     override val container = container<HomeState, Unit>(HomeState())
 
@@ -54,6 +56,9 @@ class HomeViewModel @Inject constructor(
             }
             getGenerationListUseCase().onSuccess {
                 reduce { state.copy(generationListPager = it.cachedIn(viewModelScope)) }
+            }
+            fetchIsDarkThemeUseCase().onSuccess {
+                reduce { state.copy(isDarkTheme = it) }
             }
         }
     }

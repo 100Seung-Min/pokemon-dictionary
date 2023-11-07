@@ -1,10 +1,16 @@
 package com.pokemon.feature.setting.setting
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.Switch
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -18,12 +24,32 @@ import com.pokemon.core.design_system.R
 
 @Composable
 fun SettingScreen(
+    changeDarkTheme: (Boolean) -> Unit,
     settingViewModel: SettingViewModel = hiltViewModel(),
 ) {
+    val container = settingViewModel.container
+    val state = container.stateFlow.collectAsState().value
+
+    LaunchedEffect(state.isDarkTheme) {
+        changeDarkTheme(state.isDarkTheme)
+    }
+
     PokemonBackground {
         val languageList = Language.values().toList()
         RemoveOverScrollLazyColumn {
             item {
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 15.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    PokemonText(text = "다크 테마")
+                    Switch(checked = state.isDarkTheme, onCheckedChange = {
+                        settingViewModel.saveIsDarkTheme(it)
+                    })
+                }
                 Spacer(modifier = Modifier.height(20.dp))
                 PokemonText(
                     modifier = Modifier.padding(horizontal = 15.dp),

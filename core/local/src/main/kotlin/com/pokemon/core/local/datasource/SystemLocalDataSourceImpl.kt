@@ -18,4 +18,10 @@ class SystemLocalDataSourceImpl @Inject constructor(
         else if (languageId == "zh") languageId = "zh-Hant"
         return languageId
     }
+
+    override suspend fun saveIsDarkTheme(isDarkTheme: Boolean) =
+        systemPreference.saveIsDarkTheme(isDarkTheme = isDarkTheme)
+
+    override suspend fun fetchIsDarkTheme(): Boolean =
+        systemPreference.fetchIsDarkTheme()
 }

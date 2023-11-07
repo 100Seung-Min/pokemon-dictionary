@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -29,11 +30,14 @@ import com.pokemon.core.design_system.component.PokemonBottomSheet
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
 import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
+import com.pokemon.core.ui.component.AttributeFilterItem
 import com.pokemon.core.ui.component.GenerationItem
 import com.pokemon.core.ui.component.PokemonItem
+import com.pokemon.core.ui.util.filterType
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
+import com.pokemon.core.ui.util.typeList
 
 @Composable
 fun HomeScreen(
@@ -68,6 +72,23 @@ fun HomeScreen(
             Column(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp)
             ) {
+                Text(text = "속성")
+                Spacer(modifier = Modifier.height(6.dp))
+                RemoveOverScrollLazyVerticalGrid(
+                    columns = GridCells.Fixed(4),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    items(typeList) {
+                        AttributeFilterItem(
+                            isSelected = state.selectedTypeList.contains(it),
+                            typeString = it
+                        ) {
+                            homeViewModel.changeSelectTypeList(selectType = it)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(24.dp))
                 Text(text = "세대")
                 Spacer(modifier = Modifier.height(6.dp))
                 RemoveOverScrollLazyVerticalGrid(
@@ -80,11 +101,7 @@ fun HomeScreen(
                             name = it.name,
                             isSelected = state.selectedGenerationList.contains(it)
                         ) {
-                            if (state.selectedGenerationList.contains(it)) {
-                                homeViewModel.removeSelectGenerationList(it)
-                            } else {
-                                homeViewModel.addSelectGenerationList(it)
-                            }
+                            homeViewModel.changeSelectGenerationList(selectGeneration = it)
                         }
                     }
                 }
@@ -117,25 +134,24 @@ fun HomeScreen(
                         is LoadState.Loading -> {}
                         is LoadState.Error -> {}
                         else -> {
-                            RemoveOverScrollLazyVerticalGrid(
-                                modifier = Modifier.padding(horizontal = 15.dp),
-                                contentPadding = PaddingValues(vertical = 10.dp),
-                                columns = GridCells.Fixed(3),
-                                verticalArrangement = Arrangement.spacedBy(15.dp),
-                                horizontalArrangement = Arrangement.spacedBy(15.dp)
-                            ) {
-                                items(it.itemCount) { index ->
-                                    it[index]?.let {
-                                        LaunchedEffect(Unit) {
-                                            homeViewModel.getPokemonInfo(pokemonId = it.id)
-                                        }
-                                        PokemonItem(
-                                            name = state.pokemonList[it.id],
-                                            imageUrl = it.profileUrl,
-                                            backgroundColor = state.typeList[it.id]?.toPokemonType()?.typeColor
-                                        ) {
-                                            navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
-                                        }
+                            for (index in 0 until it.itemCount) {
+                                LaunchedEffect(Unit) {
+                                    it[index]?.let { homeViewModel.getPokemonInfo(pokemonId = it.id) }
+                                }
+                            }
+                            PokemonList {
+                                items(
+                                    it.itemSnapshotList.items.filterType(
+                                        state.typeList,
+                                        state.selectedTypeList
+                                    )
+                                ) { item ->
+                                    PokemonItem(
+                                        name = state.pokemonList[item.id],
+                                        imageUrl = item.profileUrl,
+                                        backgroundColor = state.typeList[item.id]?.toPokemonType()?.typeColor
+                                    ) {
+                                        navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + item.id)
                                     }
                                 }
                             }
@@ -143,18 +159,16 @@ fun HomeScreen(
                     }
                 }
             } else {
-                RemoveOverScrollLazyVerticalGrid(
-                    modifier = Modifier.padding(horizontal = 15.dp),
-                    contentPadding = PaddingValues(vertical = 10.dp),
-                    columns = GridCells.Fixed(3),
-                    verticalArrangement = Arrangement.spacedBy(15.dp),
-                    horizontalArrangement = Arrangement.spacedBy(15.dp)
-                ) {
+                state.selectedGenerationList.forEach {
+                    for (index in 0 until it.pokemonList.size) {
+                        LaunchedEffect(Unit) {
+                            homeViewModel.getPokemonInfo(pokemonId = it.pokemonList[index].id)
+                        }
+                    }
+                }
+                PokemonList {
                     state.selectedGenerationList.forEach {
-                        items(it.pokemonList) {
-                            LaunchedEffect(Unit) {
-                                homeViewModel.getPokemonInfo(pokemonId = it.id)
-                            }
+                        items(it.pokemonList.filterType(state.typeList, state.selectedTypeList)) {
                             PokemonItem(
                                 name = state.pokemonList[it.id],
                                 imageUrl = it.profileUrl,
@@ -168,4 +182,18 @@ fun HomeScreen(
             }
         }
     }
+}
+
+@Composable
+private fun PokemonList(
+    content: LazyGridScope.() -> Unit,
+) {
+    RemoveOverScrollLazyVerticalGrid(
+        modifier = Modifier.padding(horizontal = 15.dp),
+        contentPadding = PaddingValues(vertical = 10.dp),
+        columns = GridCells.Fixed(3),
+        verticalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        content = content
+    )
 }

@@ -14,4 +14,5 @@ data class HomeState(
     val generationListPager: Flow<PagingData<GenerationEntity>>? = null,
     val generationList: List<DetailGenerationEntity> = listOf(),
     val selectedGenerationList: List<DetailGenerationEntity> = listOf(),
+    val selectedTypeList: List<String> = listOf(),
 )

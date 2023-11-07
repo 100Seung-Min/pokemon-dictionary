@@ -89,17 +89,25 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun addSelectGenerationList(selectGeneration: DetailGenerationEntity) = intent {
-        reduce {
-            state.copy(
-                selectedGenerationList = state.selectedGenerationList.plus(selectGeneration)
-                    .sortedBy { it.name })
+    fun changeSelectGenerationList(selectGeneration: DetailGenerationEntity) = intent {
+        if (state.selectedGenerationList.contains(selectGeneration)) {
+            reduce {
+                state.copy(selectedGenerationList = state.selectedGenerationList.filter { it.name != selectGeneration.name })
+            }
+        } else {
+            reduce {
+                state.copy(
+                    selectedGenerationList = state.selectedGenerationList.plus(selectGeneration)
+                        .sortedBy { it.name })
+            }
         }
     }
 
-    fun removeSelectGenerationList(selectGeneration: DetailGenerationEntity) = intent {
-        reduce {
-            state.copy(selectedGenerationList = state.selectedGenerationList.filter { it.name != selectGeneration.name })
+    fun changeSelectTypeList(selectType: String) = intent {
+        if (state.selectedTypeList.contains(selectType)) {
+            reduce { state.copy(selectedTypeList = state.selectedTypeList.filter { it != selectType }) }
+        } else {
+            reduce { state.copy(selectedTypeList = state.selectedTypeList.plus(selectType)) }
         }
     }
 }

@@ -79,6 +79,26 @@ fun AttributeItem(
 }
 
 @Composable
+fun AttributeFilterItem(
+    typeString: String,
+    isSelected: Boolean,
+    onClick: (String) -> Unit,
+) {
+    val type = typeString.toPokemonType()
+    PokemonText(
+        modifier = Modifier
+            .background(
+                type.typeColor.copy(alpha = if (isSelected) 1F else 0.5F),
+                RoundedCornerShape(10.dp)
+            )
+            .padding(horizontal = 5.dp, vertical = 3.dp)
+            .pokemonClickable { onClick(typeString) },
+        text = stringResource(id = type.typeId),
+        textAlign = TextAlign.Center
+    )
+}
+
+@Composable
 fun InfoItem(
     title: String,
     content: String,

@@ -4,10 +4,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.R
+import com.pokemon.core.domain.entity.PokemonEntity
 
 data class PokemonType(
     val typeId: Int,
     val typeColor: Color,
+)
+
+val typeList = listOf(
+    "normal",
+    "fighting",
+    "flying",
+    "poison",
+    "ground",
+    "rock",
+    "bug",
+    "ghost",
+    "steel",
+    "fire",
+    "water",
+    "grass",
+    "electric",
+    "psychic",
+    "ice",
+    "dragon",
+    "dark",
+    "fairy",
+    "unknown",
+    "shadow",
 )
 
 @Composable
@@ -33,4 +57,12 @@ fun String.toPokemonType() = when (this) {
     "unknown" -> PokemonType(R.string.unknown, PokemonTheme.colors.unknown)
     "shadow" -> PokemonType(R.string.shadow, PokemonTheme.colors.shadow)
     else -> PokemonType(R.string.normal, PokemonTheme.colors.normal)
+}
+
+fun List<PokemonEntity>.filterType(
+    typeList: Map<Int, String>,
+    selectTypeList: List<String>,
+): List<PokemonEntity> {
+    if (selectTypeList.isEmpty()) return this
+    return this.filter { selectTypeList.contains(typeList[it.id]) }
 }

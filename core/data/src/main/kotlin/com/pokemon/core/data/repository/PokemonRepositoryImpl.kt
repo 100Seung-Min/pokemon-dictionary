@@ -23,11 +23,7 @@ class PokemonRepositoryImpl @Inject constructor(
     override suspend fun getPokemonInfo(pokemonId: Int): InfoPokemonEntity =
         pokemonRemoteDataSource.getPokemonInfo(pokemonId = pokemonId).toEntity()
 
-    override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonEntity {
-        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
-        if (languageId == "ja") languageId = "ja-Hrkt"
-        else if (languageId == "zh") languageId = "zh-Hant"
-        return pokemonRemoteDataSource.getPokemonDetail(pokemonId = pokemonId)
-            .toEntity(languageId = languageId)
-    }
+    override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonEntity =
+        pokemonRemoteDataSource.getPokemonDetail(pokemonId = pokemonId)
+            .toEntity(languageId = systemLocalDataSource.fetchLanguageId())
 }

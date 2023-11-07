@@ -19,11 +19,7 @@ class ItemRepositoryImpl @Inject constructor(
     override suspend fun getItemList(): Flow<PagingData<ItemEntity>> =
         itemRemoteDataSource.getItemList().map { it.map { it.toEntity() } }
 
-    override suspend fun getItemDetail(itemId: Int): DetailItemEntity {
-        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
-        if (languageId == "ja") languageId = "ja-Hrkt"
-        else if (languageId == "zh") languageId = "zh-Hant"
-        return itemRemoteDataSource.getItemDetail(itemId = itemId)
-            .toEntity(languageId = languageId)
-    }
+    override suspend fun getItemDetail(itemId: Int): DetailItemEntity =
+        itemRemoteDataSource.getItemDetail(itemId = itemId)
+            .toEntity(languageId = systemLocalDataSource.fetchLanguageId())
 }

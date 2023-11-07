@@ -11,11 +11,7 @@ class MoveRepositoryImpl @Inject constructor(
     private val moveRemoteDataSource: MoveRemoteDataSource,
     private val systemLocalDataSource: SystemLocalDataSource,
 ) : MoveRepository {
-    override suspend fun getMoveDetail(moveId: Int): DetailMoveEntity {
-        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
-        if (languageId == "ja") languageId = "ja-Hrkt"
-        else if (languageId == "zh") languageId = "zh-Hant"
-        return moveRemoteDataSource.getMoveDetail(moveId = moveId)
-            .toEntity(languageId = languageId)
-    }
+    override suspend fun getMoveDetail(moveId: Int): DetailMoveEntity =
+        moveRemoteDataSource.getMoveDetail(moveId = moveId)
+            .toEntity(languageId = systemLocalDataSource.fetchLanguageId())
 }

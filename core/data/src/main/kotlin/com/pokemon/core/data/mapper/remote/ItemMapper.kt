@@ -13,6 +13,6 @@ fun URLResponse.toItemEntity() = ItemEntity(
 )
 
 fun DetailItemResponse.toEntity(languageId: String) = DetailItemEntity(
-    name = nameList.getName(languageId = languageId, defaultValue = ""),
+    name = nameList.getName(languageId = languageId, defaultValue = name),
     flavorList = flavorList.toFlavorList(languageId = languageId)
 )

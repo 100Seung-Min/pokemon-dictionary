@@ -6,6 +6,8 @@ import com.pokemon.core.remote.response.util.NameResponse
 import com.pokemon.core.remote.response.util.TypeResponse
 
 data class DetailMoveResponse(
+    @SerializedName("name")
+    val name: String,
     @SerializedName("flavor_text_entries")
     val flavorList: List<FlavorTextResponse>,
     @SerializedName("type")

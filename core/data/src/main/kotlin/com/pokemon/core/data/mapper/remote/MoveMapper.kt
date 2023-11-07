@@ -4,7 +4,7 @@ import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.remote.response.move.DetailMoveResponse
 
 fun DetailMoveResponse.toEntity(languageId: String) = DetailMoveEntity(
-    name = nameList.getName(languageId = languageId, defaultValue = ""),
+    name = nameList.getName(languageId = languageId, defaultValue = name),
     type = type.name,
     flavorList = flavorList.toFlavorTextList(languageId = languageId)
 )

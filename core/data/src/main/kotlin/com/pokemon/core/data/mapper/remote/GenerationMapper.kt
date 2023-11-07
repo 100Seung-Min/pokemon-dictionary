@@ -9,6 +9,6 @@ import com.pokemon.core.remote.response.util.URLResponse
 fun URLResponse.toGenerationEntity() = GenerationEntity(id = url.getId())
 
 fun DetailGenerationResponse.toEntity(languageId: String) = DetailGenerationEntity(
-    name = nameList.getName(languageId = languageId, defaultValue = ""),
+    name = nameList.getName(languageId = languageId, defaultValue = name),
     pokemonList = pokemonList.map { it.toPokemonEntity() }
 )

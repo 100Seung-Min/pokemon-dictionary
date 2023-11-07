@@ -2,6 +2,11 @@ package com.pokemon.feature.pokemon.detail
 
 import android.media.MediaPlayer
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -151,18 +156,17 @@ fun DetailScreen(
                 ) {
                     items(state.moveList) {
                         MoveItem(it) {
-                            if (selectedMove == null || selectedMove != it) {
-                                moveDescriptionVisible = true
-                                selectedMove = it
-                            } else {
-                                moveDescriptionVisible = false
-                                selectedMove = null
-                            }
+                            moveDescriptionVisible = selectedMove != it || !moveDescriptionVisible
+                            selectedMove = it
                         }
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                AnimatedVisibility(visible = moveDescriptionVisible) {
+                AnimatedVisibility(
+                    visible = moveDescriptionVisible,
+                    enter = expandVertically(),
+                    exit = shrinkVertically()
+                ) {
                     selectedMove?.let {
                         descriptionPager(
                             descriptionList = it.flavorList,
@@ -199,7 +203,9 @@ fun DetailScreen(
                                 .background(Color.LightGray, CircleShape)
                                 .padding(5.dp)
                                 .pokemonClickable {
-                                    navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
+                                    if (it.id != state.id) {
+                                        navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
+                                    }
                                 },
                             model = it.profileUrl,
                             contentDescription = null

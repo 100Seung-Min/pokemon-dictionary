@@ -51,7 +51,7 @@ fun SettingScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    PokemonText(text = "다크 테마")
+                    PokemonText(text = stringResource(id = R.string.dark_theme))
                     Switch(
                         checked = state.isDarkTheme ?: false,
                         colors = SwitchDefaults.colors(

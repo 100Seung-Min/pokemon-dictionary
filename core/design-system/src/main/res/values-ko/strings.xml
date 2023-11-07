@@ -27,4 +27,12 @@
     <string name="evolution">진화 트리</string>
     <string name="abilities">사용 기술</string>
     <string name="setting_language">언어 설정</string>
+    <string name="filter">필터</string>
+    <string name="type">타입</string>
+    <string name="generation">세대</string>
+    <string name="easy">쉬움</string>
+    <string name="hard">어려움</string>
+    <string name="dark_theme">다크 테마</string>
+    <string name="medium">중간</string>
+    <string name="cancel_select">선택 해제</string>
 </resources>

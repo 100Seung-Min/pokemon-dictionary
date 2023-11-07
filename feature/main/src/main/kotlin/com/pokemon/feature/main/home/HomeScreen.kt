@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -28,6 +29,7 @@ import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonBottomSheet
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
+import com.pokemon.core.design_system.R
 import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
 import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
 import com.pokemon.core.ui.component.AttributeFilterItem
@@ -67,12 +69,12 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp)
             ) {
                 Row {
-                    PokemonText(text = "속성")
+                    PokemonText(text = stringResource(id = R.string.type))
                     Spacer(modifier = Modifier.width(12.dp))
                     if (state.selectedTypeList.isNotEmpty()) {
                         PokemonText(
                             modifier = Modifier.pokemonClickable { homeViewModel.clearSelectTypeList() },
-                            text = "선택 해제"
+                            text = stringResource(id = R.string.cancel_select)
                         )
                     }
                 }
@@ -93,12 +95,12 @@ fun HomeScreen(
                 }
                 Spacer(modifier = Modifier.height(24.dp))
                 Row {
-                    PokemonText(text = "세대")
+                    PokemonText(text = stringResource(id = R.string.generation))
                     Spacer(modifier = Modifier.width(12.dp))
                     if (state.selectedGenerationList.isNotEmpty()) {
                         PokemonText(
                             modifier = Modifier.pokemonClickable { homeViewModel.clearSelectGenerationList() },
-                            text = "선택 해제"
+                            text = stringResource(id = R.string.cancel_select)
                         )
                     }
                 }
@@ -136,7 +138,7 @@ fun HomeScreen(
                             bottomSheetAction()
                         }
                 ) {
-                    PokemonText(text = "필터")
+                    PokemonText(text = stringResource(id = R.string.filter))
                 }
             }
             Spacer(modifier = Modifier.height(6.dp))

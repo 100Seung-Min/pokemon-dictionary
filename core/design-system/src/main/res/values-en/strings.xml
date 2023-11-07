@@ -27,4 +27,12 @@
     <string name="evolution">Evolution</string>
     <string name="abilities">abilities</string>
     <string name="setting_language">Language settings</string>
+    <string name="filter">Filter</string>
+    <string name="type">Type</string>
+    <string name="generation">Generation</string>
+    <string name="easy">Easy</string>
+    <string name="hard">Hard</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="medium">Normal</string>
+    <string name="cancel_select">Deselect</string>
 </resources>

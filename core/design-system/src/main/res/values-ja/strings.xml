@@ -27,4 +27,12 @@
     <string name="evolution">進化</string>
     <string name="abilities">能力</string>
     <string name="setting_language">言語設定</string>
+    <string name="filter">フィルター</string>
+    <string name="type">タイプ</string>
+    <string name="generation">世代</string>
+    <string name="easy">簡単</string>
+    <string name="hard">難しい</string>
+    <string name="dark_theme">"暗いテーマ "</string>
+    <string name="medium">普通</string>
+    <string name="cancel_select">選択を解除します</string>
 </resources>

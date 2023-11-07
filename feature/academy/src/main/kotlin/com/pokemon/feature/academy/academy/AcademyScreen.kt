@@ -7,12 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
+import com.pokemon.core.design_system.R
 import com.pokemon.core.navigation.academy.AcademyDeepLinkKey
 import com.pokemon.core.navigation.academy.AcademyNavigationItem
 import com.pokemon.core.ui.component.AcademyMenuItem
@@ -30,19 +32,19 @@ fun AcademyScreen(
 
     val iconList = listOf(
         AcademyMenuModel(
-            title = "쉬움",
+            title = stringResource(id = R.string.easy),
             icon = PokemonIconList.Easy,
             backgroundColor = Color.Gray,
             route = AcademyNavigationItem.Easy.route
         ),
         AcademyMenuModel(
-            title = "노말",
+            title = stringResource(id = R.string.medium),
             icon = PokemonIconList.Normal,
             backgroundColor = Color.Gray,
             route = AcademyNavigationItem.Normal.route
         ),
         AcademyMenuModel(
-            title = "어려움",
+            title = stringResource(id = R.string.hard),
             icon = PokemonIconList.Hard,
             backgroundColor = Color.Gray,
             route = AcademyNavigationItem.Hard.route

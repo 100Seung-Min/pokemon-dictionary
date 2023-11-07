@@ -7,7 +7,7 @@ import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
 import com.pokemon.core.remote.response.pokemon.DetailPokemonResponse
 import com.pokemon.core.remote.response.pokemon.InfoPokemonResponse
-import com.pokemon.core.remote.response.pokemon.PokemonResponse
+import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import com.pokemon.core.remote.util.pokemonApiCall
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class PokemonRemoteDataSourceImpl @Inject constructor(
     private val pokemonAPI: PokemonAPI,
 ) : PokemonRemoteDataSource {
-    override suspend fun getPokemonList(): Flow<PagingData<PokemonResponse>> =
+    override suspend fun getPokemonList(): Flow<PagingData<URLResponse>> =
         Pager(config = PagingConfig(pageSize = PAGING_SIZE), pagingSourceFactory = {
             PokemonPagingSource(pokemonAPI = pokemonAPI)
         }).flow

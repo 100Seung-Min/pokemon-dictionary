@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.pokemon.core.remote.api.ItemAPI
 import com.pokemon.core.remote.pagingsource.ItemPagingSource
 import com.pokemon.core.remote.response.item.DetailItemResponse
-import com.pokemon.core.remote.response.item.ItemResponse
+import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import com.pokemon.core.remote.util.pokemonApiCall
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class ItemRemoteDataSourceImpl @Inject constructor(
     private val itemAPI: ItemAPI,
 ) : ItemRemoteDataSource {
-    override suspend fun getItemList(): Flow<PagingData<ItemResponse>> =
+    override suspend fun getItemList(): Flow<PagingData<URLResponse>> =
         Pager(config = PagingConfig(pageSize = PAGING_SIZE), pagingSourceFactory = {
             ItemPagingSource(itemAPI = itemAPI)
         }).flow

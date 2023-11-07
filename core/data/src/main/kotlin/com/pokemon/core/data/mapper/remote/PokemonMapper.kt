@@ -5,11 +5,11 @@ import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.remote.response.pokemon.DetailPokemonResponse
 import com.pokemon.core.remote.response.pokemon.InfoPokemonResponse
-import com.pokemon.core.remote.response.pokemon.PokemonResponse
 import com.pokemon.core.data.mapper.util.getId
 import com.pokemon.core.data.mapper.util.toPokemonImageUrl
+import com.pokemon.core.remote.response.util.URLResponse
 
-fun PokemonResponse.toEntity(): PokemonEntity {
+fun URLResponse.toPokemonEntity(): PokemonEntity {
     val id = url.getId()
     return PokemonEntity(
         id = id,

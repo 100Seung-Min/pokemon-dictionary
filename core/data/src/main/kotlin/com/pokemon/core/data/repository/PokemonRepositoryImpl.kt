@@ -3,6 +3,7 @@ package com.pokemon.core.data.repository
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.pokemon.core.data.mapper.remote.toEntity
+import com.pokemon.core.data.mapper.remote.toPokemonEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
@@ -18,7 +19,7 @@ class PokemonRepositoryImpl @Inject constructor(
     private val systemLocalDataSource: SystemLocalDataSource,
 ) : PokemonRepository {
     override suspend fun getPokemonList(): Flow<PagingData<PokemonEntity>> =
-        pokemonRemoteDataSource.getPokemonList().map { it.map { it.toEntity() } }
+        pokemonRemoteDataSource.getPokemonList().map { it.map { it.toPokemonEntity() } }
 
     override suspend fun getPokemonInfo(pokemonId: Int): InfoPokemonEntity =
         pokemonRemoteDataSource.getPokemonInfo(pokemonId = pokemonId).toEntity()

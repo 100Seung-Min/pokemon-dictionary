@@ -8,7 +8,7 @@ import com.pokemon.core.navigation.setting.SettingNavigationItem
 import com.pokemon.feature.setting.setting.SettingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.settingGraph(navController: NavController, changeDarkTheme: (Boolean) -> Unit) {
+fun NavGraphBuilder.settingGraph(changeDarkTheme: (Boolean) -> Unit) {
     composable(route = SettingNavigationItem.Setting.route) {
         SettingScreen(changeDarkTheme = changeDarkTheme)
     }

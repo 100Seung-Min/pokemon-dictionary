@@ -63,7 +63,6 @@ fun DetailScreen(
 ) {
     val container = detailViewModel.container
     val state = container.stateFlow.collectAsState().value
-    val sideEffect = container.sideEffectFlow
     var moveDescriptionVisible by remember { mutableStateOf(false) }
     var selectedMove: DetailMoveEntity? by remember { mutableStateOf(null) }
     var isLoading by remember { mutableStateOf(true) }

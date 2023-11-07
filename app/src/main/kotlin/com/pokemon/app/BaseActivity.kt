@@ -74,7 +74,7 @@ fun BaseApp(
         mainGraph(navController = navController, changeDarkTheme = changeDarkTheme)
         itemGraph(navController = navController)
         academyGraph(navController = navController)
-        settingGraph(navController = navController, changeDarkTheme = changeDarkTheme)
+        settingGraph(changeDarkTheme = changeDarkTheme)
         pokemonGraph(navController = navController)
     }
 }

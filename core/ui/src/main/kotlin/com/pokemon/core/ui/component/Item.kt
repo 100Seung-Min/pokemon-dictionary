@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import com.pokemon.core.design_system.attribute.PokemonIcon
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.util.Language
 import com.pokemon.core.design_system.util.changeLanguage
+import com.pokemon.core.design_system.R
 import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.model.QuizModel
@@ -48,15 +50,16 @@ fun PokemonItem(
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(20.dp))
-            .background(backgroundColor ?: PokemonTheme.colors.main)
+            .background(backgroundColor ?: Color.LightGray)
             .padding(10.dp)
             .pokemonClickable { clickAction() }
     ) {
         AsyncImage(
             model = imageUrl,
             contentDescription = null,
+            placeholder = painterResource(id = R.drawable.ic_pokemon_placeholder)
         )
-        PokemonText(text = name ?: "")
+        PokemonText(text = name ?: "???")
     }
 }
 

@@ -86,5 +86,11 @@ class PokemonIconList private constructor(
             drawableId = R.drawable.ic_hard,
             contentDescription = "hard"
         )
+
+        @Stable
+        val PokemonPlaceHolder = PokemonIconList(
+            drawableId = R.drawable.ic_pokemon_placeholder,
+            contentDescription = "pokemonPlaceHolder"
+        )
     }
 }

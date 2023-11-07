@@ -1,6 +1,7 @@
 package com.pokemon.feature.item.item
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -18,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +31,7 @@ import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.domain.entity.DetailItemEntity
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.core.ui.util.pokemonClickable
+import com.pokemon.core.design_system.R
 
 @Composable
 fun ItemScreen(
@@ -69,12 +72,18 @@ fun ItemScreen(
                             it[index]?.let { itemViewModel.getItemDetail(itemId = it.id) }
                         }
                     }
-                    RemoveOverScrollLazyVerticalGrid(columns = GridCells.Fixed(3)) {
+                    RemoveOverScrollLazyVerticalGrid(
+                        columns = GridCells.Fixed(3),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
                         items(it.itemCount) { index ->
                             it[index]?.let {
                                 AsyncImage(
                                     model = state.itemDetailList[it.id]?.imageUrl,
                                     contentDescription = null,
+                                    placeholder = painterResource(id = R.drawable.ic_pokemon_placeholder),
+                                    error = painterResource(id = R.drawable.ic_pokemon_placeholder),
                                     modifier = Modifier
                                         .size(100.dp)
                                         .pokemonClickable {

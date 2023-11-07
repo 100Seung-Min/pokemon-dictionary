@@ -5,8 +5,7 @@ import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
 import com.pokemon.core.remote.response.InfoEvolutionResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
-import com.pokemon.core.remote.response.PagingItemResponse
-import com.pokemon.core.remote.response.PagingPokemonResponse
+import com.pokemon.core.remote.response.util.PagingResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,7 +16,7 @@ interface PokemonAPI {
     suspend fun getPokemonList(
         @Query("offset") offset: Int = 0,
         @Query("limit") limit: Int = PAGING_SIZE,
-    ): PagingPokemonResponse
+    ): PagingResponse
 
     @GET("pokemon/{pokemonId}")
     suspend fun getPokemonInfo(
@@ -43,7 +42,7 @@ interface PokemonAPI {
     suspend fun getItemList(
         @Query("offset") offset: Int = 0,
         @Query("limit") limit: Int = PAGING_SIZE,
-    ): PagingItemResponse
+    ): PagingResponse
 
     @GET("item/{itemId}")
     suspend fun getItemDetail(

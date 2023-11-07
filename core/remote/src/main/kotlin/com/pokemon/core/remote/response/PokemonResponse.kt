@@ -1,6 +1,7 @@
 package com.pokemon.core.remote.response
 
 import com.pokemon.core.domain.entity.PokemonEntity
+import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.getId
 import com.pokemon.core.remote.util.toPokemonImageUrl
 
@@ -9,7 +10,7 @@ data class PokemonResponse(
     val profileUrl: String,
 )
 
-fun PagingPokemonResponse.Result.toResponse(): PokemonResponse {
+fun URLResponse.toPokemonResponse(): PokemonResponse {
     val id = url.getId()
     return PokemonResponse(
         id = id,

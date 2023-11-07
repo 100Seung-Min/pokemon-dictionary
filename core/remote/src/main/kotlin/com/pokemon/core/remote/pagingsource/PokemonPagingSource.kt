@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.pokemon.core.remote.api.PokemonAPI
 import com.pokemon.core.remote.response.PokemonResponse
-import com.pokemon.core.remote.response.toResponse
+import com.pokemon.core.remote.response.toPokemonResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 
 class PokemonPagingSource(
@@ -22,7 +22,7 @@ class PokemonPagingSource(
             val response = pokemonAPI.getPokemonList(offset = page * PAGING_SIZE)
 
             LoadResult.Page(
-                data = response.result.map { it.toResponse() },
+                data = response.result.map { it.toPokemonResponse() },
                 prevKey = if (response.previous == null) null else page - 1,
                 nextKey = if (response.next == null) null else page + 1
             )

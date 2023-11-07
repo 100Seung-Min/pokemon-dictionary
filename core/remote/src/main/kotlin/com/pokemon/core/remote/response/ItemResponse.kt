@@ -1,6 +1,7 @@
 package com.pokemon.core.remote.response
 
 import com.pokemon.core.domain.entity.ItemEntity
+import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.getId
 
 data class ItemResponse(
@@ -8,7 +9,7 @@ data class ItemResponse(
     val name: String,
 )
 
-fun PagingItemResponse.Result.toResponse() = ItemResponse(
+fun URLResponse.toItemResponse() = ItemResponse(
     id = url.getId(),
     name = name
 )

@@ -2,6 +2,8 @@ package com.pokemon.core.remote.response
 
 import com.google.gson.annotations.SerializedName
 import com.pokemon.core.domain.entity.InfoPokemonEntity
+import com.pokemon.core.remote.response.util.TypeResponse
+import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.getId
 import com.pokemon.core.remote.util.toPokemonImageUrl
 
@@ -17,31 +19,16 @@ data class InfoPokemonResponse(
     @SerializedName("moves")
     val moveList: List<Moves>,
     @SerializedName("species")
-    val species: Species,
+    val species: URLResponse,
 ) {
     data class Types(
         @SerializedName("type")
-        val type: Type,
-    ) {
-        data class Type(
-            @SerializedName("name")
-            val name: String,
-        )
-    }
+        val type: TypeResponse,
+    )
 
     data class Moves(
         @SerializedName("move")
-        val move: Move,
-    ) {
-        data class Move(
-            @SerializedName("url")
-            val url: String,
-        )
-    }
-
-    data class Species(
-        @SerializedName("url")
-        val url: String,
+        val move: URLResponse,
     )
 }
 

@@ -1,9 +1,11 @@
 package com.pokemon.core.data.di
 
 import com.pokemon.core.data.repository.ItemRepositoryImpl
+import com.pokemon.core.data.repository.MoveRepositoryImpl
 import com.pokemon.core.data.repository.PokemonRepositoryImpl
 import com.pokemon.core.data.repository.SystemRepositoryImpl
 import com.pokemon.core.domain.repository.ItemRepository
+import com.pokemon.core.domain.repository.MoveRepository
 import com.pokemon.core.domain.repository.PokemonRepository
 import com.pokemon.core.domain.repository.SystemRepository
 import dagger.Binds
@@ -20,12 +22,17 @@ abstract class RepositoryModule {
     ): PokemonRepository
 
     @Binds
-    abstract fun bindsSystemRepository(
-        systemRepositoryImpl: SystemRepositoryImpl,
-    ): SystemRepository
+    abstract fun bindsMoveRepository(
+        moveRepositoryImpl: MoveRepositoryImpl,
+    ): MoveRepository
 
     @Binds
     abstract fun bindsItemRepository(
         itemRepositoryImpl: ItemRepositoryImpl,
     ): ItemRepository
+
+    @Binds
+    abstract fun bindsSystemRepository(
+        systemRepositoryImpl: SystemRepositoryImpl,
+    ): SystemRepository
 }

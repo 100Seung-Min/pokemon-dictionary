@@ -2,7 +2,6 @@ package com.pokemon.core.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
@@ -30,14 +29,6 @@ class PokemonRepositoryImpl @Inject constructor(
         if (languageId == "ja") languageId = "ja-Hrkt"
         else if (languageId == "zh") languageId = "zh-Hant"
         return pokemonRemoteDataSource.getPokemonDetail(pokemonId = pokemonId)
-            .toEntity(languageId = languageId)
-    }
-
-    override suspend fun getMoveDetail(moveId: Int): DetailMoveEntity {
-        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
-        if (languageId == "ja") languageId = "ja-Hrkt"
-        else if (languageId == "zh") languageId = "zh-Hant"
-        return pokemonRemoteDataSource.getMoveDetail(moveId = moveId)
             .toEntity(languageId = languageId)
     }
 

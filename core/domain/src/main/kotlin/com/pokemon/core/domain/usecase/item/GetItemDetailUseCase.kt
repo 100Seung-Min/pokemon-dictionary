@@ -1,7 +1,6 @@
 package com.pokemon.core.domain.usecase.item
 
 import com.pokemon.core.domain.repository.ItemRepository
-import com.pokemon.core.domain.repository.PokemonRepository
 import javax.inject.Inject
 
 class GetItemDetailUseCase @Inject constructor(

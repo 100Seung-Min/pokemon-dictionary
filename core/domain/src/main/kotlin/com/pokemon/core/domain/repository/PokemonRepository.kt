@@ -15,7 +15,5 @@ interface PokemonRepository {
 
     suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonEntity
 
-    suspend fun getMoveDetail(moveId: Int): DetailMoveEntity
-
     suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionEntity
 }

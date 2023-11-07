@@ -34,10 +34,6 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
         pokemonAPI.getPokemonDetail(pokemonId = pokemonId)
     }
 
-    override suspend fun getMoveDetail(moveId: Int): DetailMoveResponse = pokemonApiCall {
-        pokemonAPI.getMoveDetail(moveId = moveId)
-    }
-
     override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionResponse =
         pokemonApiCall {
             pokemonAPI.getEvolutionInfo(evolutionId = evolutionId)

@@ -17,7 +17,5 @@ interface PokemonRemoteDataSource {
 
     suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonResponse
 
-    suspend fun getMoveDetail(moveId: Int): DetailMoveResponse
-
     suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionResponse
 }

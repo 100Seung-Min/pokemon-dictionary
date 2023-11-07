@@ -2,6 +2,7 @@ package com.pokemon.core.ui.component
 
 import android.os.Handler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.attribute.PokemonIcon
@@ -191,4 +194,25 @@ fun LanguageItem(
                 .background(Color.Gray)
         )
     }
+}
+
+@Composable
+fun GenerationItem(
+    name: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+) {
+    Text(
+        modifier = Modifier
+            .background(
+                color = if (isSelected) Color.Cyan else Color.Transparent,
+                shape = RoundedCornerShape(20.dp)
+            )
+            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(20.dp))
+            .padding(vertical = 3.dp, horizontal = 5.dp)
+            .pokemonClickable { onClick() },
+        text = name,
+        fontSize = 12.sp,
+        textAlign = TextAlign.Center
+    )
 }

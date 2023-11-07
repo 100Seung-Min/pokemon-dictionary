@@ -3,8 +3,8 @@ package com.pokemon.core.data.mapper.remote
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.remote.response.evolution.InfoEvolutionResponse
-import com.pokemon.core.remote.util.getId
-import com.pokemon.core.remote.util.toPokemonImageUrl
+import com.pokemon.core.data.mapper.util.getId
+import com.pokemon.core.data.mapper.util.toPokemonImageUrl
 
 fun InfoEvolutionResponse.toEntity(): InfoEvolutionEntity {
     var id = chain.species.url.getId()

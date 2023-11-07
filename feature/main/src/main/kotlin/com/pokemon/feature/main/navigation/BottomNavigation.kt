@@ -56,12 +56,14 @@ fun PokemonBottomNavigation(
                     unselectedContentColor = Color.Gray,
                     selected = currentRoute == item.route,
                     onClick = {
-                        navController.navigate(item.route) {
-                            popUpTo(MainNavigationItem.Home.route) {
-                                saveState = true
+                        if (navController.currentDestination?.route != item.route) {
+                            navController.navigate(item.route) {
+                                popUpTo(MainNavigationItem.Home.route) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
                             }
-                            launchSingleTop = true
-                            restoreState = true
                         }
                     }
                 )

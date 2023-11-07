@@ -2,6 +2,7 @@ package com.pokemon.core.data.di
 
 import android.content.Context
 import com.pokemon.core.data.BuildConfig
+import com.pokemon.core.remote.api.EvolutionAPI
 import com.pokemon.core.remote.api.ItemAPI
 import com.pokemon.core.remote.api.MoveAPI
 import com.pokemon.core.remote.api.PokemonAPI
@@ -41,6 +42,10 @@ object NetworkModule {
 
     @Provides
     fun provideMoveAPI(retrofit: Retrofit): MoveAPI = retrofit.create(MoveAPI::class.java)
+
+    @Provides
+    fun provideEvolutionAPI(retrofit: Retrofit): EvolutionAPI =
+        retrofit.create(EvolutionAPI::class.java)
 
     @Provides
     fun provideItemAPI(retrofit: Retrofit): ItemAPI = retrofit.create(ItemAPI::class.java)

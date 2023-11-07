@@ -1,5 +1,7 @@
 package com.pokemon.core.remote.di
 
+import com.pokemon.core.remote.datasource.evolution.EvolutionRemoteDataSource
+import com.pokemon.core.remote.datasource.evolution.EvolutionRemoteDataSourceImpl
 import com.pokemon.core.remote.datasource.item.ItemRemoteDataSource
 import com.pokemon.core.remote.datasource.item.ItemRemoteDataSourceImpl
 import com.pokemon.core.remote.datasource.move.MoveRemoteDataSource
@@ -23,6 +25,11 @@ abstract class RemoteDataSourceModule {
     abstract fun bindsMoveRemoteDataSource(
         moveRemoteDataSourceImpl: MoveRemoteDataSourceImpl,
     ): MoveRemoteDataSource
+
+    @Binds
+    abstract fun bindsEvolutionRemoteDataSource(
+        evolutionRemoteDataSourceImpl: EvolutionRemoteDataSourceImpl,
+    ): EvolutionRemoteDataSource
 
     @Binds
     abstract fun bindsItemRemoteDataSource(

@@ -4,14 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.pokemon.core.remote.api.PokemonAPI
-import com.pokemon.core.remote.pagingsource.ItemPagingSource
 import com.pokemon.core.remote.pagingsource.PokemonPagingSource
-import com.pokemon.core.remote.response.DetailItemResponse
-import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
-import com.pokemon.core.remote.response.InfoEvolutionResponse
 import com.pokemon.core.remote.response.InfoPokemonResponse
-import com.pokemon.core.remote.response.ItemResponse
 import com.pokemon.core.remote.response.PokemonResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import com.pokemon.core.remote.util.pokemonApiCall
@@ -33,9 +28,4 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
     override suspend fun getPokemonDetail(pokemonId: Int): DetailPokemonResponse = pokemonApiCall {
         pokemonAPI.getPokemonDetail(pokemonId = pokemonId)
     }
-
-    override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionResponse =
-        pokemonApiCall {
-            pokemonAPI.getEvolutionInfo(evolutionId = evolutionId)
-        }
 }

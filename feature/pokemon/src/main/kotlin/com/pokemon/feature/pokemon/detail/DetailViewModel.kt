@@ -2,7 +2,7 @@ package com.pokemon.feature.pokemon.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pokemon.core.domain.usecase.pokemon.GetEvolutionInfoUseCase
+import com.pokemon.core.domain.usecase.evolution.GetEvolutionInfoUseCase
 import com.pokemon.core.domain.usecase.move.GetMoveDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonInfoUseCase

@@ -1,9 +1,11 @@
 package com.pokemon.core.data.di
 
+import com.pokemon.core.data.repository.EvolutionRepositoryImpl
 import com.pokemon.core.data.repository.ItemRepositoryImpl
 import com.pokemon.core.data.repository.MoveRepositoryImpl
 import com.pokemon.core.data.repository.PokemonRepositoryImpl
 import com.pokemon.core.data.repository.SystemRepositoryImpl
+import com.pokemon.core.domain.repository.EvolutionRepository
 import com.pokemon.core.domain.repository.ItemRepository
 import com.pokemon.core.domain.repository.MoveRepository
 import com.pokemon.core.domain.repository.PokemonRepository
@@ -25,6 +27,11 @@ abstract class RepositoryModule {
     abstract fun bindsMoveRepository(
         moveRepositoryImpl: MoveRepositoryImpl,
     ): MoveRepository
+
+    @Binds
+    abstract fun bindsEvolutionRepository(
+        evolutionRepositoryImpl: EvolutionRepositoryImpl,
+    ): EvolutionRepository
 
     @Binds
     abstract fun bindsItemRepository(

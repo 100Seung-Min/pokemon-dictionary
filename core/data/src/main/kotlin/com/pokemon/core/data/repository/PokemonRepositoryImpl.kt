@@ -3,7 +3,6 @@ package com.pokemon.core.data.repository
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.pokemon.core.domain.entity.DetailPokemonEntity
-import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.domain.repository.PokemonRepository
@@ -31,7 +30,4 @@ class PokemonRepositoryImpl @Inject constructor(
         return pokemonRemoteDataSource.getPokemonDetail(pokemonId = pokemonId)
             .toEntity(languageId = languageId)
     }
-
-    override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionEntity =
-        pokemonRemoteDataSource.getEvolutionInfo(evolutionId = evolutionId).toEntity()
 }

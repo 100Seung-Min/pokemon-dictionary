@@ -15,8 +15,8 @@ import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.R
-import com.pokemon.core.navigation.academy.AcademyDeepLinkKey
 import com.pokemon.core.navigation.academy.AcademyNavigationItem
+import com.pokemon.core.navigation.academy.navigateQuizScreen
 import com.pokemon.core.ui.component.AcademyMenuItem
 import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.util.getActivity
@@ -57,7 +57,7 @@ fun AcademyScreen(
         ) {
             items(iconList) {
                 AcademyMenuItem(item = it) {
-                    navController.navigate(it.route + AcademyDeepLinkKey.QuizId + 0)
+                    navController.navigateQuizScreen(route = it.route, quizId = 0)
                 }
             }
         }

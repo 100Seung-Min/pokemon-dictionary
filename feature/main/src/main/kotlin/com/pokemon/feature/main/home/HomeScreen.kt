@@ -30,8 +30,7 @@ import com.pokemon.core.design_system.component.PokemonBottomSheet
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.design_system.R
-import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
-import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
+import com.pokemon.core.navigation.pokemon.navigatePokemonDetail
 import com.pokemon.core.ui.component.AttributeFilterItem
 import com.pokemon.core.ui.component.GenerationItem
 import com.pokemon.core.ui.component.PokemonItem
@@ -165,7 +164,7 @@ fun HomeScreen(
                                         imageUrl = item.profileUrl,
                                         backgroundColor = state.typeList[item.id]?.toPokemonType()?.typeColor
                                     ) {
-                                        navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + item.id)
+                                        navController.navigatePokemonDetail(pokemonId = item.id)
                                     }
                                 }
                             }
@@ -188,7 +187,7 @@ fun HomeScreen(
                                 imageUrl = it.profileUrl,
                                 backgroundColor = state.typeList[it.id]?.toPokemonType()?.typeColor
                             ) {
-                                navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
+                                navController.navigatePokemonDetail(pokemonId = it.id)
                             }
                         }
                     }

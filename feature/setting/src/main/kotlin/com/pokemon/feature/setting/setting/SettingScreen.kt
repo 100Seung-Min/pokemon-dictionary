@@ -7,14 +7,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Switch
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
@@ -45,12 +48,22 @@ fun SettingScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 15.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     PokemonText(text = "다크 테마")
-                    Switch(checked = state.isDarkTheme ?: false, onCheckedChange = {
-                        settingViewModel.saveIsDarkTheme(it)
-                    })
+                    Switch(
+                        checked = state.isDarkTheme ?: false,
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = PokemonTheme.colors.main,
+                            uncheckedThumbColor = PokemonTheme.colors.main,
+                            checkedTrackColor = PokemonTheme.colors.text,
+                            uncheckedTrackColor = PokemonTheme.colors.text,
+                        ),
+                        onCheckedChange = {
+                            settingViewModel.saveIsDarkTheme(it)
+                        },
+                    )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 PokemonText(

@@ -6,6 +6,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.pokemon.core.design_system.util.Language
 import com.pokemon.core.design_system.util.changeLanguage
+import com.pokemon.core.domain.entity.DetailGenerationEntity
+import com.pokemon.core.domain.entity.GenerationEntity
+import com.pokemon.core.domain.usecase.generation.GetGenerationDetailUseCase
+import com.pokemon.core.domain.usecase.generation.GetGenerationListUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonInfoUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonListUseCase
@@ -24,11 +28,13 @@ class HomeViewModel @Inject constructor(
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase,
     private val getPokemonInfoUseCase: GetPokemonInfoUseCase,
     private val fetchLanguageUseCase: FetchLanguageUseCase,
+    private val getGenerationListUseCase: GetGenerationListUseCase,
+    private val getGenerationDetailUseCase: GetGenerationDetailUseCase,
 ) : ContainerHost<HomeState, Unit>, ViewModel() {
     override val container = container<HomeState, Unit>(HomeState())
 
     init {
-        getPokemonList()
+        getInitList()
     }
 
     fun settingLanguage(context: Context) = intent {
@@ -41,10 +47,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getPokemonList() = intent {
+    private fun getInitList() = intent {
         viewModelScope.launch {
             getPokemonListUseCase().onSuccess {
                 reduce { state.copy(pokemonListPager = it.cachedIn(viewModelScope)) }
+            }
+            getGenerationListUseCase().onSuccess {
+                reduce { state.copy(generationListPager = it.cachedIn(viewModelScope)) }
             }
         }
     }
@@ -63,6 +72,34 @@ class HomeViewModel @Inject constructor(
             getPokemonDetailUseCase(pokemonId = speciesId).onSuccess {
                 reduce { state.copy(pokemonList = state.pokemonList.plus(pokemonId to it.name)) }
             }
+        }
+    }
+
+    fun getGenerationDetail(generationList: List<GenerationEntity?>) = intent {
+        viewModelScope.launch {
+            reduce { state.copy(generationList = listOf()) }
+            generationList.forEach {
+                it?.let {
+                    getGenerationDetailUseCase(generationId = it.id).onSuccess {
+                        reduce { state.copy(generationList = state.generationList.plus(it)) }
+                    }
+                }
+            }
+            reduce { state.copy(generationList = state.generationList.sortedBy { it.name }) }
+        }
+    }
+
+    fun addSelectGenerationList(selectGeneration: DetailGenerationEntity) = intent {
+        reduce {
+            state.copy(
+                selectedGenerationList = state.selectedGenerationList.plus(selectGeneration)
+                    .sortedBy { it.name })
+        }
+    }
+
+    fun removeSelectGenerationList(selectGeneration: DetailGenerationEntity) = intent {
+        reduce {
+            state.copy(selectedGenerationList = state.selectedGenerationList.filter { it.name != selectGeneration.name })
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.pokemon.core.remote.datasource.pokemon
 
 import androidx.paging.PagingData
-import com.pokemon.core.remote.response.DetailPokemonResponse
-import com.pokemon.core.remote.response.InfoPokemonResponse
-import com.pokemon.core.remote.response.PokemonResponse
+import com.pokemon.core.remote.response.pokemon.DetailPokemonResponse
+import com.pokemon.core.remote.response.pokemon.InfoPokemonResponse
+import com.pokemon.core.remote.response.pokemon.PokemonResponse
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonRemoteDataSource {

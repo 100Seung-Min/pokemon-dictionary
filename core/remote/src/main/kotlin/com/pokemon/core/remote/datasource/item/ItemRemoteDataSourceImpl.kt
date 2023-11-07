@@ -5,8 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.pokemon.core.remote.api.ItemAPI
 import com.pokemon.core.remote.pagingsource.ItemPagingSource
-import com.pokemon.core.remote.response.DetailItemResponse
-import com.pokemon.core.remote.response.ItemResponse
+import com.pokemon.core.remote.response.item.DetailItemResponse
+import com.pokemon.core.remote.response.item.ItemResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import com.pokemon.core.remote.util.pokemonApiCall
 import kotlinx.coroutines.flow.Flow

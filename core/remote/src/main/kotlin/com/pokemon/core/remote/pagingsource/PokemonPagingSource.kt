@@ -3,8 +3,8 @@ package com.pokemon.core.remote.pagingsource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.pokemon.core.remote.api.PokemonAPI
-import com.pokemon.core.remote.response.PokemonResponse
-import com.pokemon.core.remote.response.toPokemonResponse
+import com.pokemon.core.remote.response.pokemon.PokemonResponse
+import com.pokemon.core.remote.response.pokemon.toPokemonResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 
 class PokemonPagingSource(

@@ -1,6 +1,5 @@
-package com.pokemon.core.remote.response
+package com.pokemon.core.remote.response.pokemon
 
-import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.remote.response.util.URLResponse
 import com.pokemon.core.remote.util.getId
 import com.pokemon.core.remote.util.toPokemonImageUrl
@@ -17,8 +16,3 @@ fun URLResponse.toPokemonResponse(): PokemonResponse {
         profileUrl = id.toPokemonImageUrl()
     )
 }
-
-fun PokemonResponse.toEntity() = PokemonEntity(
-    id = id,
-    profileUrl = profileUrl
-)

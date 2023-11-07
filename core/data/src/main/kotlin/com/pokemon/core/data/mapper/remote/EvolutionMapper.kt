@@ -1,23 +1,10 @@
-package com.pokemon.core.remote.response
+package com.pokemon.core.data.mapper.remote
 
-import com.google.gson.annotations.SerializedName
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.PokemonEntity
-import com.pokemon.core.remote.response.util.URLResponse
+import com.pokemon.core.remote.response.evolution.InfoEvolutionResponse
 import com.pokemon.core.remote.util.getId
 import com.pokemon.core.remote.util.toPokemonImageUrl
-
-data class InfoEvolutionResponse(
-    @SerializedName("chain")
-    val chain: Chain,
-) {
-    data class Chain(
-        @SerializedName("species")
-        val species: URLResponse,
-        @SerializedName("evolves_to")
-        val nextEvolution: List<Chain>,
-    )
-}
 
 fun InfoEvolutionResponse.toEntity(): InfoEvolutionEntity {
     var id = chain.species.url.getId()

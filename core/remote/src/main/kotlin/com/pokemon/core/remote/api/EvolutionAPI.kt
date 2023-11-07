@@ -1,6 +1,6 @@
 package com.pokemon.core.remote.api
 
-import com.pokemon.core.remote.response.InfoEvolutionResponse
+import com.pokemon.core.remote.response.evolution.InfoEvolutionResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

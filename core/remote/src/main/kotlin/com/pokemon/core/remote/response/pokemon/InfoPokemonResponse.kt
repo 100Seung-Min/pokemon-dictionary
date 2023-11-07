@@ -1,11 +1,8 @@
-package com.pokemon.core.remote.response
+package com.pokemon.core.remote.response.pokemon
 
 import com.google.gson.annotations.SerializedName
-import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.remote.response.util.TypeResponse
 import com.pokemon.core.remote.response.util.URLResponse
-import com.pokemon.core.remote.util.getId
-import com.pokemon.core.remote.util.toPokemonImageUrl
 
 data class InfoPokemonResponse(
     @SerializedName("id")
@@ -31,12 +28,3 @@ data class InfoPokemonResponse(
         val move: URLResponse,
     )
 }
-
-fun InfoPokemonResponse.toEntity() = InfoPokemonEntity(
-    profileUrl = id.toPokemonImageUrl(),
-    speciesId = species.url.getId(),
-    weight = weight,
-    height = height,
-    typeList = typeList.map { it.type.name },
-    moveList = moveList.map { it.move.url.getId() }
-)

@@ -40,7 +40,7 @@ fun PokemonBottomNavigation(
         )
     ) {
         BottomNavigation(
-            modifier = Modifier.height(45.dp),
+            modifier = Modifier.height(50.dp),
             backgroundColor = Color.LightGray,
             contentColor = Color.Black
         ) {

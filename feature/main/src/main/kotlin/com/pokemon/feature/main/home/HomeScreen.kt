@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
@@ -65,7 +66,16 @@ fun HomeScreen(
             Column(
                 modifier = Modifier.padding(horizontal = 15.dp, vertical = 20.dp)
             ) {
-                PokemonText(text = "속성")
+                Row {
+                    PokemonText(text = "속성")
+                    Spacer(modifier = Modifier.width(12.dp))
+                    if (state.selectedTypeList.isNotEmpty()) {
+                        PokemonText(
+                            modifier = Modifier.pokemonClickable { homeViewModel.clearSelectTypeList() },
+                            text = "선택 해제"
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(6.dp))
                 RemoveOverScrollLazyVerticalGrid(
                     columns = GridCells.Fixed(4),
@@ -82,7 +92,16 @@ fun HomeScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(24.dp))
-                PokemonText(text = "세대")
+                Row {
+                    PokemonText(text = "세대")
+                    Spacer(modifier = Modifier.width(12.dp))
+                    if (state.selectedGenerationList.isNotEmpty()) {
+                        PokemonText(
+                            modifier = Modifier.pokemonClickable { homeViewModel.clearSelectGenerationList() },
+                            text = "선택 해제"
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(6.dp))
                 RemoveOverScrollLazyVerticalGrid(
                     columns = GridCells.Fixed(3),

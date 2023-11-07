@@ -88,11 +88,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun clearSelectGenerationList() = intent {
+        reduce { state.copy(selectedGenerationList = listOf()) }
+    }
+
     fun changeSelectTypeList(selectType: String) = intent {
         if (state.selectedTypeList.contains(selectType)) {
             reduce { state.copy(selectedTypeList = state.selectedTypeList.filter { it != selectType }) }
         } else {
             reduce { state.copy(selectedTypeList = state.selectedTypeList.plus(selectType)) }
         }
+    }
+
+    fun clearSelectTypeList() = intent {
+        reduce { state.copy(selectedTypeList = listOf()) }
     }
 }

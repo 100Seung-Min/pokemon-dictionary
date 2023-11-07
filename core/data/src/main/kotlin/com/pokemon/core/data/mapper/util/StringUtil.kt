@@ -4,6 +4,3 @@ fun String.getId() = split("/").dropLast(1).last().toInt()
 
 fun Int.toPokemonImageUrl() =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$this.png"
-
-fun String.toItemImageUrl() =
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/$this.png"

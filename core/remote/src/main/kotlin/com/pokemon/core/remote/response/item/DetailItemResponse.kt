@@ -11,4 +11,11 @@ data class DetailItemResponse(
     val flavorList: List<FlavorResponse>,
     @SerializedName("names")
     val nameList: List<NameResponse>,
-)
+    @SerializedName("sprites")
+    val sprites: Sprites,
+) {
+    data class Sprites(
+        @SerializedName("default")
+        val imageUrl: String?,
+    )
+}

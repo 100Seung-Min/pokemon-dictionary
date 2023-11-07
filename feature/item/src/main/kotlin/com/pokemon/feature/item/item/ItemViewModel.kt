@@ -23,7 +23,7 @@ class ItemViewModel @Inject constructor(
     fun getItemList() = intent {
         viewModelScope.launch {
             getItemListUseCase().onSuccess {
-                reduce { state.copy(itemList = it.cachedIn(viewModelScope)) }
+                reduce { state.copy(itemPager = it.cachedIn(viewModelScope)) }
             }
         }
     }
@@ -31,7 +31,7 @@ class ItemViewModel @Inject constructor(
     fun getItemDetail(itemId: Int) = intent {
         viewModelScope.launch {
             getItemDetailUseCase(itemId = itemId).onSuccess {
-                reduce { state.copy(itemDetail = it) }
+                reduce { state.copy(itemDetailList = state.itemDetailList.plus(itemId to it)) }
             }
         }
     }

@@ -26,6 +26,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
+import com.pokemon.core.domain.entity.DetailItemEntity
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.core.ui.util.pokemonClickable
 
@@ -35,15 +36,16 @@ fun ItemScreen(
 ) {
     val container = itemViewModel.container
     val state = container.stateFlow.collectAsState().value
-    val itemPager = state.itemList?.collectAsLazyPagingItems()
+    val itemPager = state.itemPager?.collectAsLazyPagingItems()
     var isDetailItem by remember { mutableStateOf(false) }
+    var selectedItem by remember { mutableStateOf<DetailItemEntity?>(null) }
 
     LaunchedEffect(Unit) {
         itemViewModel.getItemList()
     }
     PokemonBackground {
         if (isDetailItem) {
-            state.itemDetail?.let {
+            selectedItem?.let {
                 Dialog(onDismissRequest = { isDetailItem = false }) {
                     Column(
                         modifier = Modifier
@@ -62,17 +64,22 @@ fun ItemScreen(
                 is LoadState.Loading -> {}
                 is LoadState.Error -> {}
                 else -> {
+                    for (index in 0 until it.itemCount) {
+                        LaunchedEffect(Unit) {
+                            it[index]?.let { itemViewModel.getItemDetail(itemId = it.id) }
+                        }
+                    }
                     RemoveOverScrollLazyVerticalGrid(columns = GridCells.Fixed(3)) {
                         items(it.itemCount) { index ->
                             it[index]?.let {
                                 AsyncImage(
-                                    model = it.imageUrl,
+                                    model = state.itemDetailList[it.id]?.imageUrl,
                                     contentDescription = null,
                                     modifier = Modifier
                                         .size(100.dp)
                                         .pokemonClickable {
                                             isDetailItem = true
-                                            itemViewModel.getItemDetail(itemId = it.id)
+                                            selectedItem = state.itemDetailList[it.id]
                                         }
                                 )
                             }

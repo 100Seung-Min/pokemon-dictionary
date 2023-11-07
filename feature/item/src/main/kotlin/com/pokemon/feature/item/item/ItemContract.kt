@@ -6,6 +6,6 @@ import com.pokemon.core.domain.entity.ItemEntity
 import kotlinx.coroutines.flow.Flow
 
 data class ItemState(
-    val itemList: Flow<PagingData<ItemEntity>>? = null,
-    val itemDetail: DetailItemEntity? = null,
+    val itemPager: Flow<PagingData<ItemEntity>>? = null,
+    val itemDetailList: Map<Int, DetailItemEntity> = mapOf(),
 )

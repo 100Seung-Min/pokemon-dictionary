@@ -1,11 +1,8 @@
 package com.pokemon.feature.main.home
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.pokemon.core.design_system.util.Language
-import com.pokemon.core.design_system.util.changeLanguage
 import com.pokemon.core.domain.entity.DetailGenerationEntity
 import com.pokemon.core.domain.entity.GenerationEntity
 import com.pokemon.core.domain.usecase.generation.GetGenerationDetailUseCase
@@ -13,8 +10,6 @@ import com.pokemon.core.domain.usecase.generation.GetGenerationListUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonDetailUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonInfoUseCase
 import com.pokemon.core.domain.usecase.pokemon.GetPokemonListUseCase
-import com.pokemon.core.domain.usecase.system.FetchIsDarkThemeUseCase
-import com.pokemon.core.domain.usecase.system.FetchLanguageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost
@@ -28,25 +23,13 @@ class HomeViewModel @Inject constructor(
     private val getPokemonListUseCase: GetPokemonListUseCase,
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase,
     private val getPokemonInfoUseCase: GetPokemonInfoUseCase,
-    private val fetchLanguageUseCase: FetchLanguageUseCase,
     private val getGenerationListUseCase: GetGenerationListUseCase,
     private val getGenerationDetailUseCase: GetGenerationDetailUseCase,
-    private val fetchIsDarkThemeUseCase: FetchIsDarkThemeUseCase,
 ) : ContainerHost<HomeState, Unit>, ViewModel() {
     override val container = container<HomeState, Unit>(HomeState())
 
     init {
         getInitList()
-    }
-
-    fun settingLanguage(context: Context) = intent {
-        viewModelScope.launch {
-            fetchLanguageUseCase().onSuccess {
-                Language.values().toList().forEach { language ->
-                    if (language.type == it) language.changeLanguage(context = context)
-                }
-            }
-        }
     }
 
     private fun getInitList() = intent {
@@ -56,9 +39,6 @@ class HomeViewModel @Inject constructor(
             }
             getGenerationListUseCase().onSuccess {
                 reduce { state.copy(generationListPager = it.cachedIn(viewModelScope)) }
-            }
-            fetchIsDarkThemeUseCase().onSuccess {
-                reduce { state.copy(isDarkTheme = it) }
             }
         }
     }

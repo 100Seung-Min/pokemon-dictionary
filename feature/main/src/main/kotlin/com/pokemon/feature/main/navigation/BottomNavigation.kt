@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.pokemon.core.design_system.attribute.PokemonIcon
 import com.pokemon.core.navigation.bottom_navigation.BottomNavigationItem
+import com.pokemon.core.navigation.home.MainNavigationItem
 
 @Composable
 fun PokemonBottomNavigation(
@@ -56,10 +57,8 @@ fun PokemonBottomNavigation(
                     selected = currentRoute == item.route,
                     onClick = {
                         navController.navigate(item.route) {
-                            navController.graph.startDestinationRoute?.let { screenRoute ->
-                                popUpTo(screenRoute) {
-                                    saveState = true
-                                }
+                            popUpTo(MainNavigationItem.Home.route) {
+                                saveState = true
                             }
                             launchSingleTop = true
                             restoreState = true

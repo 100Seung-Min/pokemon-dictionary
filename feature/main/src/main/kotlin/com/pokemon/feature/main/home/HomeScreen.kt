@@ -18,7 +18,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -42,19 +41,12 @@ import com.pokemon.core.ui.util.typeList
 @Composable
 fun HomeScreen(
     navController: NavController,
-    changeDarkTheme: (Boolean) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(getActivity()),
 ) {
     val container = homeViewModel.container
     val state = container.stateFlow.collectAsState().value
-    val sideEffect = container.sideEffectFlow
     val pokemonPager = state.pokemonListPager?.collectAsLazyPagingItems()
     val generationPager = state.generationListPager?.collectAsLazyPagingItems()
-    val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        homeViewModel.settingLanguage(context)
-    }
 
     LaunchedEffect(generationPager?.loadState?.refresh) {
         if (generationPager != null) {
@@ -66,10 +58,6 @@ fun HomeScreen(
                 }
             }
         }
-    }
-
-    LaunchedEffect(state.isDarkTheme) {
-        changeDarkTheme(state.isDarkTheme)
     }
 
     PokemonBottomSheet(

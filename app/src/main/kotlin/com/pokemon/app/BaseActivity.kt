@@ -22,7 +22,7 @@ import com.pokemon.core.navigation.home.MainNavigationItem
 import com.pokemon.feature.academy.navigation.academyGraph
 import com.pokemon.feature.item.navigation.itemGraph
 import com.pokemon.feature.main.navigation.PokemonBottomNavigation
-import com.pokemon.feature.main.navigation.homeGraph
+import com.pokemon.feature.main.navigation.mainGraph
 import com.pokemon.feature.pokemon.navigation.pokemonGraph
 import com.pokemon.feature.setting.navigation.settingGraph
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,13 +65,13 @@ fun BaseApp(
     AnimatedNavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = MainNavigationItem.Main.route,
+        startDestination = MainNavigationItem.Splash.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None }
     ) {
-        homeGraph(navController = navController, changeDarkTheme = changeDarkTheme)
+        mainGraph(navController = navController, changeDarkTheme = changeDarkTheme)
         itemGraph(navController = navController)
         academyGraph(navController = navController)
         settingGraph(navController = navController, changeDarkTheme = changeDarkTheme)

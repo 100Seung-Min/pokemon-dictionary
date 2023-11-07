@@ -40,17 +40,19 @@ fun descriptionPager(
             Text(text = descriptionList[it])
         }
         Spacer(modifier = Modifier.height(6.dp))
-        LazyRow {
-            items(descriptionList.size) {
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 3.dp)
-                        .size(5.dp)
-                        .background(
-                            if (it == descriptionPagerState.currentPage) Color.Black else Color.Gray,
-                            CircleShape
-                        )
-                )
+        if (descriptionList.size != 1) {
+            LazyRow {
+                items(descriptionList.size) {
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 3.dp)
+                            .size(5.dp)
+                            .background(
+                                if (it == descriptionPagerState.currentPage) Color.Black else Color.Gray,
+                                CircleShape
+                            )
+                    )
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.pokemon.core.remote.datasource
+package com.pokemon.core.remote.datasource.pokemon
 
 import androidx.paging.PagingData
 import com.pokemon.core.remote.response.DetailItemResponse
@@ -20,8 +20,4 @@ interface PokemonRemoteDataSource {
     suspend fun getMoveDetail(moveId: Int): DetailMoveResponse
 
     suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionResponse
-
-    suspend fun getItemList(): Flow<PagingData<ItemResponse>>
-
-    suspend fun getItemDetail(itemId: Int): DetailItemResponse
 }

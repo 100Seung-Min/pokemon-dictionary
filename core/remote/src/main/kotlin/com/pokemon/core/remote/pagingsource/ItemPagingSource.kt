@@ -2,13 +2,13 @@ package com.pokemon.core.remote.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.pokemon.core.remote.api.PokemonAPI
+import com.pokemon.core.remote.api.ItemAPI
 import com.pokemon.core.remote.response.ItemResponse
 import com.pokemon.core.remote.response.toItemResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 
 class ItemPagingSource(
-    private val pokemonAPI: PokemonAPI,
+    private val itemAPI: ItemAPI,
 ) : PagingSource<Int, ItemResponse>() {
     override fun getRefreshKey(state: PagingState<Int, ItemResponse>): Int? =
         state.anchorPosition?.let { anchorPosition ->
@@ -19,7 +19,7 @@ class ItemPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ItemResponse> {
         return try {
             val page = params.key ?: 0
-            val response = pokemonAPI.getItemList(offset = page * PAGING_SIZE)
+            val response = itemAPI.getItemList(offset = page * PAGING_SIZE)
 
             LoadResult.Page(
                 data = response.result.map { it.toItemResponse() },

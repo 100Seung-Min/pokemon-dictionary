@@ -1,6 +1,5 @@
 package com.pokemon.core.remote.api
 
-import com.pokemon.core.remote.response.DetailItemResponse
 import com.pokemon.core.remote.response.DetailMoveResponse
 import com.pokemon.core.remote.response.DetailPokemonResponse
 import com.pokemon.core.remote.response.InfoEvolutionResponse
@@ -37,15 +36,4 @@ interface PokemonAPI {
     suspend fun getEvolutionInfo(
         @Path("evolutionId") evolutionId: Int,
     ): InfoEvolutionResponse
-
-    @GET("item")
-    suspend fun getItemList(
-        @Query("offset") offset: Int = 0,
-        @Query("limit") limit: Int = PAGING_SIZE,
-    ): PagingResponse
-
-    @GET("item/{itemId}")
-    suspend fun getItemDetail(
-        @Path("itemId") itemId: Int,
-    ): DetailItemResponse
 }

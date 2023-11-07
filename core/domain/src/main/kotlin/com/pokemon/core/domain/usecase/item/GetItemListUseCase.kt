@@ -1,12 +1,13 @@
-package com.pokemon.core.domain.usecase.pokemon
+package com.pokemon.core.domain.usecase.item
 
+import com.pokemon.core.domain.repository.ItemRepository
 import com.pokemon.core.domain.repository.PokemonRepository
 import javax.inject.Inject
 
 class GetItemListUseCase @Inject constructor(
-    private val pokemonRepository: PokemonRepository,
+    private val itemRepository: ItemRepository,
 ) {
     suspend operator fun invoke() = kotlin.runCatching {
-        pokemonRepository.getItemList()
+        itemRepository.getItemList()
     }
 }

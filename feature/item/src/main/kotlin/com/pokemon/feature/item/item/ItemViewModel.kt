@@ -3,8 +3,8 @@ package com.pokemon.feature.item.item
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.pokemon.core.domain.usecase.pokemon.GetItemDetailUseCase
-import com.pokemon.core.domain.usecase.pokemon.GetItemListUseCase
+import com.pokemon.core.domain.usecase.item.GetItemDetailUseCase
+import com.pokemon.core.domain.usecase.item.GetItemListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.ContainerHost

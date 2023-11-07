@@ -2,16 +2,14 @@ package com.pokemon.core.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.pokemon.core.domain.entity.DetailItemEntity
 import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
-import com.pokemon.core.domain.entity.ItemEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.domain.repository.PokemonRepository
 import com.pokemon.core.local.datasource.SystemLocalDataSource
-import com.pokemon.core.remote.datasource.PokemonRemoteDataSource
+import com.pokemon.core.remote.datasource.pokemon.PokemonRemoteDataSource
 import com.pokemon.core.remote.response.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -45,15 +43,4 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override suspend fun getEvolutionInfo(evolutionId: Int): InfoEvolutionEntity =
         pokemonRemoteDataSource.getEvolutionInfo(evolutionId = evolutionId).toEntity()
-
-    override suspend fun getItemList(): Flow<PagingData<ItemEntity>> =
-        pokemonRemoteDataSource.getItemList().map { it.map { it.toEntity() } }
-
-    override suspend fun getItemDetail(itemId: Int): DetailItemEntity {
-        var languageId = systemLocalDataSource.fetchLanguage() ?: "ko"
-        if (languageId == "ja") languageId = "ja-Hrkt"
-        else if (languageId == "zh") languageId = "zh-Hant"
-        return pokemonRemoteDataSource.getItemDetail(itemId = itemId)
-            .toEntity(languageId = languageId)
-    }
 }

@@ -37,7 +37,7 @@ class SettingViewModel @Inject constructor(
 
     fun saveIsDarkTheme(isDarkTheme: Boolean) = intent {
         saveIsDarkThemeUseCase(isDarkTheme = isDarkTheme).onSuccess {
-            reduce { state.copy(isDarkTheme = !state.isDarkTheme) }
+            reduce { state.copy(isDarkTheme = state.isDarkTheme?.not()) }
         }
     }
 }

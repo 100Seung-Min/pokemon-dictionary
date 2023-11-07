@@ -31,7 +31,9 @@ fun SettingScreen(
     val state = container.stateFlow.collectAsState().value
 
     LaunchedEffect(state.isDarkTheme) {
-        changeDarkTheme(state.isDarkTheme)
+        if (state.isDarkTheme != null) {
+            changeDarkTheme(state.isDarkTheme)
+        }
     }
 
     PokemonBackground {
@@ -46,7 +48,7 @@ fun SettingScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     PokemonText(text = "다크 테마")
-                    Switch(checked = state.isDarkTheme, onCheckedChange = {
+                    Switch(checked = state.isDarkTheme ?: false, onCheckedChange = {
                         settingViewModel.saveIsDarkTheme(it)
                     })
                 }

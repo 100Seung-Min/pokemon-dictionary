@@ -57,7 +57,8 @@ fun PokemonItem(
         AsyncImage(
             model = imageUrl,
             contentDescription = null,
-            placeholder = painterResource(id = R.drawable.ic_pokemon_placeholder)
+            placeholder = painterResource(id = R.drawable.ic_pokemon_placeholder),
+            error = painterResource(id = R.drawable.ic_pokemon_placeholder)
         )
         PokemonText(text = name ?: "???")
     }

@@ -147,8 +147,8 @@ fun HomeScreen(
                         is LoadState.Loading -> {}
                         is LoadState.Error -> {}
                         else -> {
-                            for (index in 0 until it.itemCount) {
-                                LaunchedEffect(Unit) {
+                            LaunchedEffect(it.itemCount) {
+                                for (index in 0 until it.itemCount) {
                                     it[index]?.let { homeViewModel.getPokemonInfo(pokemonId = it.id) }
                                 }
                             }
@@ -162,7 +162,8 @@ fun HomeScreen(
                                     PokemonItem(
                                         name = state.pokemonList[item.id],
                                         imageUrl = item.profileUrl,
-                                        backgroundColor = state.typeList[item.id]?.toPokemonType()?.typeColor
+                                        backgroundColor = state.typeList[item.id]?.get(0)
+                                            ?.toPokemonType()?.typeColor
                                     ) {
                                         navController.navigatePokemonDetail(pokemonId = item.id)
                                     }
@@ -185,7 +186,8 @@ fun HomeScreen(
                             PokemonItem(
                                 name = state.pokemonList[it.id],
                                 imageUrl = it.profileUrl,
-                                backgroundColor = state.typeList[it.id]?.toPokemonType()?.typeColor
+                                backgroundColor = state.typeList[it.id]?.get(0)
+                                    ?.toPokemonType()?.typeColor
                             ) {
                                 navController.navigatePokemonDetail(pokemonId = it.id)
                             }

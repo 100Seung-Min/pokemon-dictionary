@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             if (state.typeList[pokemonId] == null) {
                 getPokemonInfoUseCase(pokemonId = pokemonId).onSuccess {
-                    reduce { state.copy(typeList = state.typeList.plus(pokemonId to it.typeList[0])) }
+                    reduce { state.copy(typeList = state.typeList.plus(pokemonId to it.typeList)) }
                     getPokemonDetail(speciesId = it.speciesId, pokemonId = pokemonId)
                 }
             }

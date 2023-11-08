@@ -60,9 +60,11 @@ fun String.toPokemonType() = when (this) {
 }
 
 fun List<PokemonEntity>.filterType(
-    typeList: Map<Int, String>,
+    typeList: Map<Int, List<String>>,
     selectTypeList: List<String>,
 ): List<PokemonEntity> {
     if (selectTypeList.isEmpty()) return this
-    return this.filter { selectTypeList.contains(typeList[it.id]) }
+    return this.filter {
+        typeList[it.id]?.map { selectTypeList.contains(it) }?.contains(true) ?: false
+    }
 }

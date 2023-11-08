@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 data class HomeState(
     val pokemonListPager: Flow<PagingData<PokemonEntity>>? = null,
     val pokemonList: Map<Int, String> = mapOf(),
-    val typeList: Map<Int, String> = mapOf(),
+    val typeList: Map<Int, List<String>> = mapOf(),
     val generationListPager: Flow<PagingData<GenerationEntity>>? = null,
     val generationList: List<DetailGenerationEntity> = listOf(),
     val selectedGenerationList: List<DetailGenerationEntity> = listOf(),

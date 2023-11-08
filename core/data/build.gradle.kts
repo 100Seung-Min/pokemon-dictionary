@@ -17,7 +17,6 @@ android {
 
 dependencies {
     implementation(project(":core:remote"))
-    implementation(project(":core:local"))
     implementation(project(":core:domain"))
     implementation(libs.paging)
     implementation(libs.bundles.retrofit)

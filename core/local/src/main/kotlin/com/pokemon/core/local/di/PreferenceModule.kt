@@ -1,6 +1,6 @@
 package com.pokemon.core.local.di
 
-import com.pokemon.core.local.preference.SystemPreference
+import com.pokemon.core.data.local.preference.SystemPreference
 import com.pokemon.core.local.preference.SystemPreferenceImpl
 import dagger.Binds
 import dagger.Module

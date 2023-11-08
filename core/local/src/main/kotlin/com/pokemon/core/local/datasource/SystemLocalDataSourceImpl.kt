@@ -1,11 +1,11 @@
 package com.pokemon.core.local.datasource
 
-import com.pokemon.core.local.preference.SystemPreference
+import com.pokemon.core.data.local.preference.SystemPreference
 import javax.inject.Inject
 
 class SystemLocalDataSourceImpl @Inject constructor(
     private val systemPreference: SystemPreference,
-) : SystemLocalDataSource {
+) : com.pokemon.core.data.local.datasource.SystemLocalDataSource {
     override suspend fun saveLanguage(language: String) =
         systemPreference.saveLanguage(language)
 

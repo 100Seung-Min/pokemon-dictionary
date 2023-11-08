@@ -1,6 +1,6 @@
 package com.pokemon.core.local.di
 
-import com.pokemon.core.local.datasource.SystemLocalDataSource
+import com.pokemon.core.data.local.datasource.SystemLocalDataSource
 import com.pokemon.core.local.datasource.SystemLocalDataSourceImpl
 import dagger.Binds
 import dagger.Module

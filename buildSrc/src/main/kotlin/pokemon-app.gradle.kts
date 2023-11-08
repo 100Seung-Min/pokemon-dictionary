@@ -62,6 +62,7 @@ android {
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:remote"))
+    implementation(project(":core:local"))
     implementation(project(":core:design-system"))
     implementation(project(":core:navigation"))
     implementation(libs.findLibrary("androidx.core").get())

@@ -1,11 +1,9 @@
-package com.pokemon.core.local.datasource
+package com.pokemon.core.data.local.preference
 
-interface SystemLocalDataSource {
+interface SystemPreference {
     suspend fun saveLanguage(language: String)
 
     suspend fun fetchLanguage(): String?
-
-    suspend fun fetchLanguageId(): String
 
     suspend fun saveIsDarkTheme(isDarkTheme: Boolean)
 

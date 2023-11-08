@@ -1,7 +1,7 @@
 package com.pokemon.core.data.repository
 
 import com.pokemon.core.domain.repository.SystemRepository
-import com.pokemon.core.local.datasource.SystemLocalDataSource
+import com.pokemon.core.data.local.datasource.SystemLocalDataSource
 import javax.inject.Inject
 
 class SystemRepositoryImpl @Inject constructor(

@@ -7,7 +7,7 @@ import com.pokemon.core.data.mapper.remote.toGenerationEntity
 import com.pokemon.core.domain.entity.DetailGenerationEntity
 import com.pokemon.core.domain.entity.GenerationEntity
 import com.pokemon.core.domain.repository.GenerationRepository
-import com.pokemon.core.local.datasource.SystemLocalDataSource
+import com.pokemon.core.data.local.datasource.SystemLocalDataSource
 import com.pokemon.core.remote.datasource.generation.GenerationRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -1,6 +1,7 @@
 package com.pokemon.core.local.preference
 
 import android.content.SharedPreferences
+import com.pokemon.core.data.local.preference.SystemPreference
 import javax.inject.Inject
 
 class SystemPreferenceImpl @Inject constructor(

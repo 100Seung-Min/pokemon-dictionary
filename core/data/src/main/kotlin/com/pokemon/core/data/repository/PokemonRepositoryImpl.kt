@@ -8,7 +8,7 @@ import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.domain.repository.PokemonRepository
-import com.pokemon.core.local.datasource.SystemLocalDataSource
+import com.pokemon.core.data.local.datasource.SystemLocalDataSource
 import com.pokemon.core.remote.datasource.pokemon.PokemonRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

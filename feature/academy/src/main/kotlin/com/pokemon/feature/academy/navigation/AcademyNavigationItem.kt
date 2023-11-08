@@ -1,4 +1,4 @@
-package com.pokemon.core.navigation.academy
+package com.pokemon.feature.academy.navigation
 
 sealed class AcademyNavigationItem(val route: String) {
     data object Academy : AcademyNavigationItem(route = "academy")

@@ -18,11 +18,14 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.pokemon.core.design_system.PokemonTheme
-import com.pokemon.core.navigation.home.MainNavigationItem
+import com.pokemon.feature.main.navigation.MainNavigationItem
 import com.pokemon.feature.academy.navigation.academyGraph
 import com.pokemon.feature.item.navigation.itemGraph
-import com.pokemon.feature.main.navigation.PokemonBottomNavigation
+import com.pokemon.app.bottom_navigation.PokemonBottomNavigation
+import com.pokemon.feature.academy.navigation.navigateQuiz
 import com.pokemon.feature.main.navigation.mainGraph
+import com.pokemon.feature.main.navigation.navigateHome
+import com.pokemon.feature.pokemon.navigation.navigatePokemonDetail
 import com.pokemon.feature.pokemon.navigation.pokemonGraph
 import com.pokemon.feature.setting.navigation.settingGraph
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,10 +74,14 @@ fun BaseApp(
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None }
     ) {
-        mainGraph(navController = navController, changeDarkTheme = changeDarkTheme)
-        itemGraph(navController = navController)
-        academyGraph(navController = navController)
+        mainGraph(
+            navigatePokemonDetail = navController::navigatePokemonDetail,
+            navigateHome = navController::navigateHome,
+            changeDarkTheme = changeDarkTheme
+        )
+        pokemonGraph(navigatePokemonDetail = navController::navigatePokemonDetail)
+        academyGraph(navigateQuiz = navController::navigateQuiz)
         settingGraph(changeDarkTheme = changeDarkTheme)
-        pokemonGraph(navController = navController)
+        itemGraph()
     }
 }

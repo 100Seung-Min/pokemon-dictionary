@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.pokemon.core.design_system.component.PokemonBackground
@@ -30,7 +29,6 @@ import com.pokemon.core.design_system.component.PokemonBottomSheet
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.design_system.R
-import com.pokemon.core.navigation.pokemon.navigatePokemonDetail
 import com.pokemon.core.ui.component.AttributeFilterItem
 import com.pokemon.core.ui.component.GenerationItem
 import com.pokemon.core.ui.component.PokemonItem
@@ -42,7 +40,7 @@ import com.pokemon.core.ui.util.typeList
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
+    navigatePokemonDetail: (Int) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(getActivity()),
 ) {
     val container = homeViewModel.container
@@ -165,7 +163,7 @@ fun HomeScreen(
                                         backgroundColor = state.typeList[item.id]?.get(0)
                                             ?.toPokemonType()?.typeColor
                                     ) {
-                                        navController.navigatePokemonDetail(pokemonId = item.id)
+                                        navigatePokemonDetail(item.id)
                                     }
                                 }
                             }
@@ -189,7 +187,7 @@ fun HomeScreen(
                                 backgroundColor = state.typeList[it.id]?.get(0)
                                     ?.toPokemonType()?.typeColor
                             ) {
-                                navController.navigatePokemonDetail(pokemonId = it.id)
+                                navigatePokemonDetail(it.id)
                             }
                         }
                     }

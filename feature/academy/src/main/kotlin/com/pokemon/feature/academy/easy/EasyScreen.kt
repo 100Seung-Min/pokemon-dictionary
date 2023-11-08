@@ -21,15 +21,15 @@ import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
-import com.pokemon.core.navigation.academy.AcademyDeepLinkKey
-import com.pokemon.core.navigation.academy.AcademyNavigationItem
+import com.pokemon.feature.academy.navigation.AcademyDeepLinkKey
+import com.pokemon.feature.academy.navigation.AcademyNavigationItem
 import com.pokemon.core.ui.component.QuizItem
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.feature.academy.academy.AcademyViewModel
 
 @Composable
 fun EasyScreen(
-    navController: NavController,
+    navigateQuiz: (String, Int) -> Unit,
     quizId: Int,
     academyViewModel: AcademyViewModel = hiltViewModel(getActivity()),
 ) {
@@ -73,12 +73,7 @@ fun EasyScreen(
                     onSelected = { isSelected = true }
                 ) {
                     academyViewModel.addAnswer(isAnswer = it)
-                    if (quizId < 19) navController.navigate(AcademyNavigationItem.Easy.route + AcademyDeepLinkKey.QuizId + (quizId + 1)) {
-                        popUpTo(AcademyNavigationItem.Academy.route)
-                    }
-                    else navController.navigate(AcademyNavigationItem.Result.route) {
-                        popUpTo(AcademyNavigationItem.Academy.route)
-                    }
+                    navigateQuiz(AcademyNavigationItem.Easy.route, quizId + 1)
                 }
             }
         }

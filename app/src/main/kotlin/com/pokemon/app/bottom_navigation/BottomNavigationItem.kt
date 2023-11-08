@@ -1,10 +1,10 @@
-package com.pokemon.core.navigation.bottom_navigation
+package com.pokemon.app.bottom_navigation
 
 import com.pokemon.core.design_system.attribute.PokemonIconList
-import com.pokemon.core.navigation.academy.AcademyNavigationItem
-import com.pokemon.core.navigation.home.MainNavigationItem
-import com.pokemon.core.navigation.item.ItemNavigationItem
-import com.pokemon.core.navigation.setting.SettingNavigationItem
+import com.pokemon.feature.academy.navigation.AcademyNavigationItem
+import com.pokemon.feature.item.navigation.ItemNavigationItem
+import com.pokemon.feature.main.navigation.MainNavigationItem
+import com.pokemon.feature.setting.navigation.SettingNavigationItem
 
 enum class BottomNavigationItem(val route: String, val icon: PokemonIconList) {
     Home(route = MainNavigationItem.Home.route, icon = PokemonIconList.NavHome),

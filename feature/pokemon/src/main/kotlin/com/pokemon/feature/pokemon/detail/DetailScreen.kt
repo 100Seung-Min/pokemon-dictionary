@@ -2,11 +2,8 @@ package com.pokemon.feature.pokemon.detail
 
 import android.media.MediaPlayer
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.attribute.PokemonIcon
@@ -45,8 +41,6 @@ import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyRow
 import com.pokemon.core.domain.entity.DetailMoveEntity
-import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
-import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
 import com.pokemon.core.ui.component.AttributeItem
 import com.pokemon.core.ui.component.InfoItem
 import com.pokemon.core.ui.component.MoveItem
@@ -57,8 +51,8 @@ import com.pokemon.core.design_system.R
 
 @Composable
 fun DetailScreen(
-    navController: NavController,
     id: Int,
+    navigatePokemonDetail: (Int) -> Unit,
     detailViewModel: DetailViewModel = hiltViewModel(),
 ) {
     val container = detailViewModel.container
@@ -203,7 +197,7 @@ fun DetailScreen(
                                 .padding(5.dp)
                                 .pokemonClickable {
                                     if (it.id != state.id) {
-                                        navController.navigate(PokemonNavigationItem.Detail.route + PokemonDeepLinkKey.ID + it.id)
+                                        navigatePokemonDetail(it.id)
                                     }
                                 },
                             model = it.profileUrl,

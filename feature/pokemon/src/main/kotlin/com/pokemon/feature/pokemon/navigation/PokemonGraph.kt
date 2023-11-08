@@ -1,15 +1,12 @@
 package com.pokemon.feature.pokemon.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.pokemon.core.design_system.component.animateComposable
-import com.pokemon.core.navigation.pokemon.PokemonDeepLinkKey
-import com.pokemon.core.navigation.pokemon.PokemonNavigationItem
 import com.pokemon.feature.pokemon.detail.DetailScreen
 
-fun NavGraphBuilder.pokemonGraph(navController: NavController) {
+fun NavGraphBuilder.pokemonGraph(navigatePokemonDetail: (Int) -> Unit) {
     animateComposable(
         route = PokemonNavigationItem.Detail.route +
                 PokemonDeepLinkKey.ID + "{${PokemonDeepLinkKey.ID}}",
@@ -20,6 +17,6 @@ fun NavGraphBuilder.pokemonGraph(navController: NavController) {
         )
     ) {
         val id = it.arguments?.getInt(PokemonDeepLinkKey.ID) ?: 1
-        DetailScreen(navController = navController, id = id)
+        DetailScreen(navigatePokemonDetail = navigatePokemonDetail, id = id)
     }
 }

@@ -21,13 +21,12 @@ import com.airbnb.lottie.compose.rememberLottieAnimatable
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.pokemon.core.design_system.PokemonTheme
 import com.pokemon.core.design_system.R
-import com.pokemon.core.design_system.component.PokemonBackground
-import com.pokemon.core.navigation.home.MainNavigationItem
+import com.pokemon.feature.main.navigation.MainNavigationItem
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    navController: NavController,
+    navigateHome: () -> Unit,
     changeDarkTheme: (Boolean) -> Unit,
     splashViewModel: SplashViewModel = hiltViewModel(),
 ) {
@@ -46,11 +45,7 @@ fun SplashScreen(
     LaunchedEffect(state.isDarkTheme) {
         changeDarkTheme(state.isDarkTheme)
         delay(2000)
-        navController.navigate(MainNavigationItem.Home.route) {
-            popUpTo(MainNavigationItem.Splash.route) {
-                inclusive = true
-            }
-        }
+        navigateHome()
     }
 
     LaunchedEffect(composition) {

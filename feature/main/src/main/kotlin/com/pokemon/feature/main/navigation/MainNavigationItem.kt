@@ -1,4 +1,4 @@
-package com.pokemon.core.navigation.home
+package com.pokemon.feature.main.navigation
 
 sealed class MainNavigationItem(val route: String) {
     data object Home : MainNavigationItem(route = "home")

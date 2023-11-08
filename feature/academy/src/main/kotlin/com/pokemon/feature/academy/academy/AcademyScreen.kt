@@ -10,20 +10,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.R
-import com.pokemon.core.navigation.academy.AcademyNavigationItem
-import com.pokemon.core.navigation.academy.navigateQuizScreen
+import com.pokemon.feature.academy.navigation.AcademyNavigationItem
 import com.pokemon.core.ui.component.AcademyMenuItem
 import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.util.getActivity
 
 @Composable
 fun AcademyScreen(
-    navController: NavController,
+    navigateQuiz: (String, Int) -> Unit,
     academyViewModel: AcademyViewModel = hiltViewModel(getActivity()),
 ) {
     LaunchedEffect(Unit) {
@@ -57,7 +55,7 @@ fun AcademyScreen(
         ) {
             items(iconList) {
                 AcademyMenuItem(item = it) {
-                    navController.navigateQuizScreen(route = it.route, quizId = 0)
+                    navigateQuiz(it.route, 0)
                 }
             }
         }

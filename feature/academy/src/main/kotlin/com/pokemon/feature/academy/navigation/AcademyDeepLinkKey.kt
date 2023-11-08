@@ -1,4 +1,4 @@
-package com.pokemon.core.navigation.academy
+package com.pokemon.feature.academy.navigation
 
 object AcademyDeepLinkKey {
     const val QuizId = "quizId"

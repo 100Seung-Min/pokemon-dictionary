@@ -4,9 +4,12 @@ import com.google.gson.annotations.SerializedName
 import com.pokemon.core.data.remote.response.util.TypeResponse
 import com.pokemon.core.data.remote.response.util.URLResponse
 import com.pokemon.core.data.remote.util.getId
+import com.pokemon.core.data.remote.util.toPokemonImageUrl
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 
 data class InfoPokemonResponse(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("weight")
     val weight: Int,
     @SerializedName("height")
@@ -17,8 +20,6 @@ data class InfoPokemonResponse(
     val moveList: List<Moves>,
     @SerializedName("species")
     val species: URLResponse,
-    @SerializedName("sprites")
-    val sprites: Sprites,
 ) {
     data class Types(
         @SerializedName("type")
@@ -29,25 +30,10 @@ data class InfoPokemonResponse(
         @SerializedName("move")
         val move: URLResponse,
     )
-
-    data class Sprites(
-        @SerializedName("other")
-        val other: Other,
-    ) {
-        data class Other(
-            @SerializedName("official-artwork")
-            val officialArtwork: OfficialArtwork,
-        ) {
-            data class OfficialArtwork(
-                @SerializedName("front_default")
-                val imageUrl: String?,
-            )
-        }
-    }
 }
 
 fun InfoPokemonResponse.toEntity() = InfoPokemonEntity(
-    profileUrl = sprites.other.officialArtwork.imageUrl ?: "",
+    profileUrl = id.toPokemonImageUrl(),
     speciesId = species.url.getId(),
     weight = weight,
     height = height,

@@ -1,15 +1,15 @@
 package com.pokemon.core.remote.di
 
-import com.pokemon.core.remote.datasource.evolution.EvolutionRemoteDataSource
-import com.pokemon.core.remote.datasource.evolution.EvolutionRemoteDataSourceImpl
-import com.pokemon.core.remote.datasource.generation.GenerationRemoteDataSource
-import com.pokemon.core.remote.datasource.generation.GenerationRemoteDataSourceImpl
-import com.pokemon.core.remote.datasource.item.ItemRemoteDataSource
-import com.pokemon.core.remote.datasource.item.ItemRemoteDataSourceImpl
-import com.pokemon.core.remote.datasource.move.MoveRemoteDataSource
-import com.pokemon.core.remote.datasource.move.MoveRemoteDataSourceImpl
-import com.pokemon.core.remote.datasource.pokemon.PokemonRemoteDataSource
-import com.pokemon.core.remote.datasource.pokemon.PokemonRemoteDataSourceImpl
+import com.pokemon.core.data.remote.datasource.EvolutionRemoteDataSource
+import com.pokemon.core.remote.datasource.EvolutionRemoteDataSourceImpl
+import com.pokemon.core.data.remote.datasource.GenerationRemoteDataSource
+import com.pokemon.core.remote.datasource.GenerationRemoteDataSourceImpl
+import com.pokemon.core.data.remote.datasource.ItemRemoteDataSource
+import com.pokemon.core.remote.datasource.ItemRemoteDataSourceImpl
+import com.pokemon.core.data.remote.datasource.MoveRemoteDataSource
+import com.pokemon.core.remote.datasource.MoveRemoteDataSourceImpl
+import com.pokemon.core.data.remote.datasource.PokemonRemoteDataSource
+import com.pokemon.core.remote.datasource.PokemonRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

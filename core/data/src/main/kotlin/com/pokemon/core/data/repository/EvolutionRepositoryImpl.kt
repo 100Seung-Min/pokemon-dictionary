@@ -1,9 +1,9 @@
 package com.pokemon.core.data.repository
 
-import com.pokemon.core.data.mapper.remote.toEntity
 import com.pokemon.core.domain.entity.InfoEvolutionEntity
 import com.pokemon.core.domain.repository.EvolutionRepository
-import com.pokemon.core.remote.datasource.evolution.EvolutionRemoteDataSource
+import com.pokemon.core.data.remote.datasource.EvolutionRemoteDataSource
+import com.pokemon.core.data.remote.response.evolution.toEntity
 import javax.inject.Inject
 
 class EvolutionRepositoryImpl @Inject constructor(

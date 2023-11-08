@@ -1,8 +1,8 @@
 package com.pokemon.core.remote.api
 
-import com.pokemon.core.remote.response.pokemon.DetailPokemonResponse
-import com.pokemon.core.remote.response.pokemon.InfoPokemonResponse
-import com.pokemon.core.remote.response.util.PagingResponse
+import com.pokemon.core.data.remote.response.pokemon.DetailPokemonResponse
+import com.pokemon.core.data.remote.response.pokemon.InfoPokemonResponse
+import com.pokemon.core.data.remote.response.util.PagingResponse
 import com.pokemon.core.remote.util.PAGING_SIZE
 import retrofit2.http.GET
 import retrofit2.http.Path

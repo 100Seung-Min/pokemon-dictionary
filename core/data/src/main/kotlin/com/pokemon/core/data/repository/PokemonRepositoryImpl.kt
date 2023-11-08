@@ -2,14 +2,14 @@ package com.pokemon.core.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.pokemon.core.data.mapper.remote.toEntity
-import com.pokemon.core.data.mapper.remote.toPokemonEntity
 import com.pokemon.core.domain.entity.DetailPokemonEntity
 import com.pokemon.core.domain.entity.InfoPokemonEntity
 import com.pokemon.core.domain.entity.PokemonEntity
 import com.pokemon.core.domain.repository.PokemonRepository
 import com.pokemon.core.data.local.datasource.SystemLocalDataSource
-import com.pokemon.core.remote.datasource.pokemon.PokemonRemoteDataSource
+import com.pokemon.core.data.remote.datasource.PokemonRemoteDataSource
+import com.pokemon.core.data.remote.response.pokemon.toEntity
+import com.pokemon.core.data.remote.response.util.toPokemonEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

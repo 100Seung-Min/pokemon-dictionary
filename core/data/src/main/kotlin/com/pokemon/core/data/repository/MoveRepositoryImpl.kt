@@ -1,10 +1,10 @@
 package com.pokemon.core.data.repository
 
-import com.pokemon.core.data.mapper.remote.toEntity
 import com.pokemon.core.domain.entity.DetailMoveEntity
 import com.pokemon.core.domain.repository.MoveRepository
 import com.pokemon.core.data.local.datasource.SystemLocalDataSource
-import com.pokemon.core.remote.datasource.move.MoveRemoteDataSource
+import com.pokemon.core.data.remote.datasource.MoveRemoteDataSource
+import com.pokemon.core.data.remote.response.move.toEntity
 import javax.inject.Inject
 
 class MoveRepositoryImpl @Inject constructor(

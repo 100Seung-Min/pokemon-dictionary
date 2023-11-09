@@ -28,7 +28,7 @@ class QuizViewModel @Inject constructor(
                 getPokemonDetailUseCase(answerPokemonId + plusIndex).onSuccess {
                     quizList.add(QuizModel(id = it.id, name = it.name))
                     if (i == 0) {
-                        reduce { state.copy(answerId = it.id) }
+                        reduce { state.copy(pokemonId = it.id) }
                     }
                 }
             }
@@ -38,7 +38,7 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    fun generationToPokemonQuiz(finishLoading: () -> Unit) = intent {
+    fun generationQuiz(isToPokemon: Boolean, finishLoading: () -> Unit) = intent {
         val answerGenerationId = (1..9).random()
         val quizList = mutableListOf<QuizModel>()
         reduce {
@@ -52,11 +52,15 @@ class QuizViewModel @Inject constructor(
                 val plusIndex = if (answerGenerationId < 5) i else -i
                 getGenerationDetailUseCase(generationId = answerGenerationId + plusIndex).onSuccess {
                     val quizId = it.pokemonList.random().id
-                    getPokemonDetailUseCase(pokemonId = quizId).onSuccess {
-                        quizList.add(QuizModel(id = quizId, name = it.name))
+                    if (isToPokemon) {
+                        getPokemonDetailUseCase(pokemonId = quizId).onSuccess {
+                            quizList.add(QuizModel(id = quizId, name = it.name))
+                        }
+                    } else {
+                        quizList.add(QuizModel(id = answerGenerationId + plusIndex, name = it.name))
                     }
                     if (i == 0) {
-                        reduce { state.copy(answerId = quizId) }
+                        reduce { state.copy(pokemonId = quizId) }
                     }
                 }
             }

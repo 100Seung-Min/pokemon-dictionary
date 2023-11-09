@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -14,7 +13,7 @@ import com.pokemon.core.design_system.attribute.PokemonIconList
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.R
-import com.pokemon.core.ui.component.AcademyMenuItem
+import com.pokemon.core.ui.component.item.AcademyMenuItem
 import com.pokemon.core.ui.model.AcademyMenuModel
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.feature.academy.navigation.QuizLevel

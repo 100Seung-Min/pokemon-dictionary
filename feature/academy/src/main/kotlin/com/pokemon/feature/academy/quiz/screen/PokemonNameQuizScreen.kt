@@ -20,7 +20,7 @@ import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
-import com.pokemon.core.ui.component.QuizItem
+import com.pokemon.core.ui.component.item.QuizNameItem
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.feature.academy.academy.AcademyViewModel
 import com.pokemon.feature.academy.navigation.QuizLevel
@@ -60,17 +60,23 @@ fun PokemonNameQuizScreen(
                             .align(Alignment.TopEnd),
                         text = "${quizId + 1} / 20"
                     )
+                    PokemonText(
+                        modifier = Modifier
+                            .padding(start = 10.dp)
+                            .align(Alignment.TopStart),
+                        text = "이 포켓몬은 뭘까요?"
+                    )
                     AsyncImage(
                         modifier = Modifier.align(Alignment.Center),
-                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${quizState.answerId}.png",
+                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${quizState.pokemonId}.png",
                         contentDescription = null
                     )
                 }
             }
             items(quizState.quizList) {
-                QuizItem(
+                QuizNameItem(
                     item = it,
-                    answerId = quizState.answerId,
+                    answerId = quizState.pokemonId,
                     isSelected = isSelected,
                     onSelected = { isSelected = true }
                 ) {

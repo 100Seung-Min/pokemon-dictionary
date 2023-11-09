@@ -2,6 +2,7 @@ package com.pokemon.core.ui.component.item
 
 import android.os.Handler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,12 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.ui.model.QuizModel
 import com.pokemon.core.ui.util.pokemonClickable
 
 @Composable
-fun QuizItem(
+fun QuizNameItem(
     item: QuizModel,
     answerId: Int,
     isSelected: Boolean,
@@ -48,4 +50,43 @@ fun QuizItem(
         text = item.name,
         textAlign = TextAlign.Center
     )
+}
+
+@Composable
+fun QuizImageItem(
+    item: QuizModel,
+    answerId: Int,
+    isSelected: Boolean,
+    onSelected: () -> Unit,
+    onClick: (Boolean) -> Unit,
+) {
+    var backgroundColor: Boolean? by remember { mutableStateOf(null) }
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 15.dp)
+            .fillMaxWidth()
+            .background(
+                if (backgroundColor == null) Color.LightGray else if (backgroundColor == true) Color.Green else Color.Red,
+                RoundedCornerShape(20.dp)
+            )
+            .padding(vertical = 10.dp)
+            .pokemonClickable {
+                onSelected()
+                if (item.name.isNotEmpty() && !isSelected) {
+                    backgroundColor = item.id == answerId
+                    Handler().postDelayed({
+                        onClick(item.id == answerId)
+                    }, 1000)
+                }
+            },
+    ) {
+        AsyncImage(
+            model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.id}.png",
+            contentDescription = null
+        )
+        PokemonText(
+            text = item.name,
+            textAlign = TextAlign.Center
+        )
+    }
 }

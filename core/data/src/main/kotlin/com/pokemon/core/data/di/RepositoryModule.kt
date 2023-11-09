@@ -6,12 +6,14 @@ import com.pokemon.core.data.repository.ItemRepositoryImpl
 import com.pokemon.core.data.repository.MoveRepositoryImpl
 import com.pokemon.core.data.repository.PokemonRepositoryImpl
 import com.pokemon.core.data.repository.SystemRepositoryImpl
+import com.pokemon.core.data.repository.TypeRepositoryImpl
 import com.pokemon.core.domain.repository.EvolutionRepository
 import com.pokemon.core.domain.repository.GenerationRepository
 import com.pokemon.core.domain.repository.ItemRepository
 import com.pokemon.core.domain.repository.MoveRepository
 import com.pokemon.core.domain.repository.PokemonRepository
 import com.pokemon.core.domain.repository.SystemRepository
+import com.pokemon.core.domain.repository.TypeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -24,6 +26,11 @@ abstract class RepositoryModule {
     abstract fun bindsPokemonRepository(
         pokemonRepositoryImpl: PokemonRepositoryImpl,
     ): PokemonRepository
+
+    @Binds
+    abstract fun bindsTypeRepository(
+        typeRepositoryImpl: TypeRepositoryImpl,
+    ): TypeRepository
 
     @Binds
     abstract fun bindsMoveRepository(

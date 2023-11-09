@@ -9,7 +9,9 @@ import com.pokemon.core.remote.datasource.ItemRemoteDataSourceImpl
 import com.pokemon.core.data.remote.datasource.MoveRemoteDataSource
 import com.pokemon.core.remote.datasource.MoveRemoteDataSourceImpl
 import com.pokemon.core.data.remote.datasource.PokemonRemoteDataSource
+import com.pokemon.core.data.remote.datasource.TypeRemoteDataSource
 import com.pokemon.core.remote.datasource.PokemonRemoteDataSourceImpl
+import com.pokemon.core.remote.datasource.TypeRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,6 +24,11 @@ abstract class RemoteDataSourceModule {
     abstract fun bindsPokemonRemoteDataSource(
         pokemonRemoteDataSourceImpl: PokemonRemoteDataSourceImpl,
     ): PokemonRemoteDataSource
+
+    @Binds
+    abstract fun bindsTypeRemoteDataSource(
+        typeRemoteDataSourceImpl: TypeRemoteDataSourceImpl,
+    ): TypeRemoteDataSource
 
     @Binds
     abstract fun bindsMoveRemoteDataSource(

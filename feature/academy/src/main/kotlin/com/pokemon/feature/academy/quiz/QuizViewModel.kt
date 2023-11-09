@@ -28,7 +28,12 @@ class QuizViewModel @Inject constructor(
                 getPokemonDetailUseCase(answerPokemonId + plusIndex).onSuccess {
                     quizList.add(QuizModel(id = it.id, name = it.name))
                     if (i == 0) {
-                        reduce { state.copy(pokemonId = it.id) }
+                        reduce {
+                            state.copy(
+                                pokemonId = it.id,
+                                soundUrl = "https://play.pokemonshowdown.com/audio/cries/${it.englishName}.ogg"
+                            )
+                        }
                     }
                 }
             }

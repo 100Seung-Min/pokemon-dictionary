@@ -92,5 +92,11 @@ class PokemonIconList private constructor(
             drawableId = R.drawable.ic_pokemon_placeholder,
             contentDescription = "pokemonPlaceHolder"
         )
+
+        @Stable
+        val PlaySound = PokemonIconList(
+            drawableId = R.drawable.ic_play_sound,
+            contentDescription = "playSound"
+        )
     }
 }

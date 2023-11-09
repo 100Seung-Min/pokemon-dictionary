@@ -68,7 +68,7 @@ fun NavGraphBuilder.academyGraph(navigateQuiz: (QuizLevel, Int) -> Unit) {
         )
     ) {
         val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
-        PokemonSoundQuizScreen(quizId = quizId)
+        PokemonSoundQuizScreen(navigateQuiz = navigateQuiz, quizId = quizId)
     }
 
     animateComposable(

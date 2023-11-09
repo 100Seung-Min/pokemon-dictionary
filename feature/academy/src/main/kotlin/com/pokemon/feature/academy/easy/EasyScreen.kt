@@ -16,12 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
-import com.pokemon.feature.academy.navigation.AcademyDeepLinkKey
 import com.pokemon.feature.academy.navigation.AcademyNavigationItem
 import com.pokemon.core.ui.component.QuizItem
 import com.pokemon.core.ui.util.getActivity
@@ -38,7 +36,7 @@ fun EasyScreen(
     var isLoading by remember { mutableStateOf(true) }
     var isSelected by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
-        academyViewModel.getEasyQuiz(quizId) {
+        academyViewModel.pokemonNameQuiz {
             isLoading = false
         }
     }
@@ -60,15 +58,15 @@ fun EasyScreen(
                     )
                     AsyncImage(
                         modifier = Modifier.align(Alignment.Center),
-                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${state.quizList[quizId]}.png",
+                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${state.answerId}.png",
                         contentDescription = null
                     )
                 }
             }
-            items(state.easyQuiz) {
+            items(state.quizList) {
                 QuizItem(
                     item = it,
-                    answerId = state.quizList[quizId],
+                    answerId = state.answerId,
                     isSelected = isSelected,
                     onSelected = { isSelected = true }
                 ) {

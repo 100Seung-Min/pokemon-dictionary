@@ -47,7 +47,7 @@
 # With R8 full mode generic signatures are stripped for classes that are not kept.
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
 
--keep class com.pokemon.core.remote.response.** {*;}
+-keep class com.pokemon.core.data.remote.response.** {*;}
 -dontwarn org.conscrypt.**
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**

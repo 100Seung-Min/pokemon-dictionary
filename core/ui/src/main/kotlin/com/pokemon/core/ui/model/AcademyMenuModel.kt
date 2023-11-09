@@ -7,5 +7,4 @@ data class AcademyMenuModel(
     val title: String,
     val icon: PokemonIconList,
     val backgroundColor: Color,
-    val route: String,
 )

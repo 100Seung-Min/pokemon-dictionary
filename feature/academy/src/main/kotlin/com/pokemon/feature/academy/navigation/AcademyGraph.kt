@@ -7,19 +7,20 @@ import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.composable
 import com.pokemon.core.design_system.component.animateComposable
 import com.pokemon.feature.academy.academy.AcademyScreen
-import com.pokemon.feature.academy.easy.EasyScreen
-import com.pokemon.feature.academy.hard.HardScreen
-import com.pokemon.feature.academy.normal.NormalScreen
+import com.pokemon.feature.academy.quiz.screen.PokemonNameQuizScreen
+import com.pokemon.feature.academy.quiz.screen.PokemonToGenerationQuizScreen
+import com.pokemon.feature.academy.quiz.screen.GenerationToPokemonQuizScreen
+import com.pokemon.feature.academy.quiz.screen.PokemonSoundQuizScreen
 import com.pokemon.feature.academy.result.ResultScreen
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.academyGraph(navigateQuiz: (String, Int) -> Unit) {
+fun NavGraphBuilder.academyGraph(navigateQuiz: (QuizLevel, Int) -> Unit) {
     composable(route = AcademyNavigationItem.Academy.route) {
         AcademyScreen(navigateQuiz = navigateQuiz)
     }
 
     animateComposable(
-        route = AcademyNavigationItem.Easy.route
+        route = AcademyNavigationItem.PokemonNameQuiz.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
             navArgument(AcademyDeepLinkKey.QuizId) {
@@ -28,11 +29,11 @@ fun NavGraphBuilder.academyGraph(navigateQuiz: (String, Int) -> Unit) {
         )
     ) {
         val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
-        EasyScreen(navigateQuiz = navigateQuiz, quizId = quizId)
+        PokemonNameQuizScreen(navigateQuiz = navigateQuiz, quizId = quizId)
     }
 
     animateComposable(
-        route = AcademyNavigationItem.Normal.route
+        route = AcademyNavigationItem.GenerationToPokemonQuiz.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
             navArgument(AcademyDeepLinkKey.QuizId) {
@@ -41,11 +42,11 @@ fun NavGraphBuilder.academyGraph(navigateQuiz: (String, Int) -> Unit) {
         )
     ) {
         val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
-        NormalScreen(quizId = quizId)
+        GenerationToPokemonQuizScreen(navigateQuiz = navigateQuiz, quizId = quizId)
     }
 
     animateComposable(
-        route = AcademyNavigationItem.Hard.route
+        route = AcademyNavigationItem.PokemonToGenerationQuiz.route
                 + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
         arguments = listOf(
             navArgument(AcademyDeepLinkKey.QuizId) {
@@ -54,7 +55,20 @@ fun NavGraphBuilder.academyGraph(navigateQuiz: (String, Int) -> Unit) {
         )
     ) {
         val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
-        HardScreen(quizId = quizId)
+        PokemonToGenerationQuizScreen(quizId = quizId)
+    }
+
+    animateComposable(
+        route = AcademyNavigationItem.PokemonSoundQuiz.route
+                + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
+        arguments = listOf(
+            navArgument(AcademyDeepLinkKey.QuizId) {
+                type = NavType.IntType
+            }
+        )
+    ) {
+        val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
+        PokemonSoundQuizScreen(quizId = quizId)
     }
 
     animateComposable(

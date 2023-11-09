@@ -1,10 +1,10 @@
-package com.pokemon.feature.academy.normal
+package com.pokemon.feature.academy.quiz.screen
 
 import androidx.compose.runtime.Composable
 import com.pokemon.core.design_system.component.PokemonBackground
 
 @Composable
-fun NormalScreen(
+fun PokemonSoundQuizScreen(
     quizId: Int,
 ) {
     PokemonBackground {

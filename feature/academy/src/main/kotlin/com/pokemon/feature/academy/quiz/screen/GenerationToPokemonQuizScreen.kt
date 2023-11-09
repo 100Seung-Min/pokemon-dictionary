@@ -1,4 +1,4 @@
-package com.pokemon.feature.academy.easy
+package com.pokemon.feature.academy.quiz.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,23 +20,27 @@ import coil.compose.AsyncImage
 import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
-import com.pokemon.feature.academy.navigation.AcademyNavigationItem
 import com.pokemon.core.ui.component.QuizItem
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.feature.academy.academy.AcademyViewModel
+import com.pokemon.feature.academy.navigation.QuizLevel
+import com.pokemon.feature.academy.quiz.QuizViewModel
 
 @Composable
-fun EasyScreen(
-    navigateQuiz: (String, Int) -> Unit,
+fun GenerationToPokemonQuizScreen(
+    navigateQuiz: (QuizLevel, Int) -> Unit,
     quizId: Int,
     academyViewModel: AcademyViewModel = hiltViewModel(getActivity()),
+    quizViewModel: QuizViewModel = hiltViewModel(),
 ) {
-    val container = academyViewModel.container
-    val state = container.stateFlow.collectAsState().value
+    val quizContainer = quizViewModel.container
+    val quizState = quizContainer.stateFlow.collectAsState().value
+    val academyContainer = academyViewModel.container
+    val academyState = academyContainer.stateFlow.collectAsState().value
     var isLoading by remember { mutableStateOf(true) }
     var isSelected by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
-        academyViewModel.pokemonNameQuiz {
+        quizViewModel.generationToPokemonQuiz {
             isLoading = false
         }
     }
@@ -56,22 +60,23 @@ fun EasyScreen(
                             .align(Alignment.TopEnd),
                         text = "${quizId + 1} / 20"
                     )
-                    AsyncImage(
-                        modifier = Modifier.align(Alignment.Center),
-                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${state.answerId}.png",
-                        contentDescription = null
+                    PokemonText(
+                        modifier = Modifier
+                            .padding(start = 10.dp)
+                            .align(Alignment.TopStart),
+                        text = "${quizState.generationId}세대 포켓몬은 뭘까요?"
                     )
                 }
             }
-            items(state.quizList) {
+            items(quizState.quizList) {
                 QuizItem(
                     item = it,
-                    answerId = state.answerId,
+                    answerId = quizState.answerId,
                     isSelected = isSelected,
                     onSelected = { isSelected = true }
                 ) {
                     academyViewModel.addAnswer(isAnswer = it)
-                    navigateQuiz(AcademyNavigationItem.Easy.route, quizId + 1)
+                    navigateQuiz(academyState.quizLevel, quizId + 1)
                 }
             }
         }

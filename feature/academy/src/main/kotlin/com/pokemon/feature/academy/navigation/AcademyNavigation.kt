@@ -23,7 +23,7 @@ enum class QuizLevel(val routeList: List<AcademyNavigationItem>) {
 }
 
 fun NavController.navigateQuiz(quizLevel: QuizLevel, quizId: Int) {
-    if (quizId < 19) navigate(quizLevel.routeList.random().route + AcademyDeepLinkKey.QuizId + quizId) {
+    if (quizId <= 19) navigate(quizLevel.routeList.random().route + AcademyDeepLinkKey.QuizId + quizId) {
         popUpTo(AcademyNavigationItem.Academy.route)
     } else navigate(AcademyNavigationItem.Result.route) {
         popUpTo(AcademyNavigationItem.Academy.route)

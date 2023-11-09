@@ -11,6 +11,7 @@ import com.pokemon.feature.academy.quiz.screen.PokemonNameQuizScreen
 import com.pokemon.feature.academy.quiz.screen.PokemonToGenerationQuizScreen
 import com.pokemon.feature.academy.quiz.screen.GenerationToPokemonQuizScreen
 import com.pokemon.feature.academy.quiz.screen.PokemonSoundQuizScreen
+import com.pokemon.feature.academy.quiz.screen.PokemonTypeQuizScreen
 import com.pokemon.feature.academy.result.ResultScreen
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -69,6 +70,19 @@ fun NavGraphBuilder.academyGraph(navigateQuiz: (QuizLevel, Int) -> Unit) {
     ) {
         val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
         PokemonSoundQuizScreen(navigateQuiz = navigateQuiz, quizId = quizId)
+    }
+
+    animateComposable(
+        route = AcademyNavigationItem.PokemonTypeQuiz.route
+                + AcademyDeepLinkKey.QuizId + "{${AcademyDeepLinkKey.QuizId}}",
+        arguments = listOf(
+            navArgument(AcademyDeepLinkKey.QuizId) {
+                type = NavType.IntType
+            }
+        )
+    ) {
+        val quizId = it.arguments?.getInt(AcademyDeepLinkKey.QuizId) ?: 0
+        PokemonTypeQuizScreen(navigateQuiz = navigateQuiz, quizId = quizId)
     }
 
     animateComposable(

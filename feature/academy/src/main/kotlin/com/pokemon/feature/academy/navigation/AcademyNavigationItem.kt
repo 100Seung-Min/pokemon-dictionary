@@ -11,5 +11,7 @@ sealed class AcademyNavigationItem(val route: String) {
 
     data object PokemonSoundQuiz : AcademyNavigationItem(route = "pokemonSoundQuiz")
 
+    data object PokemonTypeQuiz : AcademyNavigationItem(route = "pokemonTypeQuiz")
+
     data object Result : AcademyNavigationItem(route = "result")
 }

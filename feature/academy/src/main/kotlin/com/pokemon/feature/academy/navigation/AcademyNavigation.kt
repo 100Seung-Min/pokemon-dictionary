@@ -12,7 +12,14 @@ enum class QuizLevel(val routeList: List<AcademyNavigationItem>) {
             )
         )
     ),
-    Hard(Normal.routeList.plus(AcademyNavigationItem.PokemonSoundQuiz))
+    Hard(
+        Normal.routeList.plus(
+            listOf(
+                AcademyNavigationItem.PokemonSoundQuiz,
+                AcademyNavigationItem.PokemonTypeQuiz
+            )
+        )
+    )
 }
 
 fun NavController.navigateQuiz(quizLevel: QuizLevel, quizId: Int) {

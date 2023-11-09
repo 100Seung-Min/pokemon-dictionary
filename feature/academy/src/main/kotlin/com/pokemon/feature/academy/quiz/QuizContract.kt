@@ -7,4 +7,5 @@ data class QuizState(
     val soundUrl: String = "",
     val generationId: Int = 0,
     val pokemonId: Int = 0,
+    val typeId: Int = 0,
 )

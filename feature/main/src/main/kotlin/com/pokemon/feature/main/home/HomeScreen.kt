@@ -29,9 +29,9 @@ import com.pokemon.core.design_system.component.PokemonBottomSheet
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyVerticalGrid
 import com.pokemon.core.design_system.R
-import com.pokemon.core.ui.component.AttributeFilterItem
-import com.pokemon.core.ui.component.GenerationItem
-import com.pokemon.core.ui.component.PokemonItem
+import com.pokemon.core.ui.component.item.AttributeFilterItem
+import com.pokemon.core.ui.component.item.GenerationItem
+import com.pokemon.core.ui.component.item.PokemonItem
 import com.pokemon.core.ui.util.filterType
 import com.pokemon.core.ui.util.getActivity
 import com.pokemon.core.ui.util.pokemonClickable

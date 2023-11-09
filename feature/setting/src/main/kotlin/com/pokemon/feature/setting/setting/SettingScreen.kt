@@ -22,8 +22,8 @@ import com.pokemon.core.design_system.component.PokemonBackground
 import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.util.Language
-import com.pokemon.core.ui.component.LanguageItem
 import com.pokemon.core.design_system.R
+import com.pokemon.core.ui.component.item.LanguageItem
 
 @Composable
 fun SettingScreen(

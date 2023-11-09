@@ -41,13 +41,13 @@ import com.pokemon.core.design_system.component.PokemonText
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyColumn
 import com.pokemon.core.design_system.component.RemoveOverScrollLazyRow
 import com.pokemon.core.domain.entity.DetailMoveEntity
-import com.pokemon.core.ui.component.AttributeItem
-import com.pokemon.core.ui.component.InfoItem
-import com.pokemon.core.ui.component.MoveItem
 import com.pokemon.core.ui.component.descriptionPager
 import com.pokemon.core.ui.util.pokemonClickable
 import com.pokemon.core.ui.util.toPokemonType
 import com.pokemon.core.design_system.R
+import com.pokemon.core.ui.component.item.AttributeItem
+import com.pokemon.core.ui.component.item.InfoItem
+import com.pokemon.core.ui.component.item.MoveItem
 
 @Composable
 fun DetailScreen(
